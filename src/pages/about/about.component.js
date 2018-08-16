@@ -14,14 +14,6 @@ import styles from './about.styled';
 import CustomFooter from '../../components/footer/footer.component';
 
 class AboutUs extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            flag_param: 0,
-        };
-    }
-
     static get propTypes() {
         return {
             navigation: PropTypes.shape({

@@ -1,6 +1,6 @@
 import { createStackNavigator } from 'react-navigation';
 import Home from './pages/home/home.component';
-import Calculator from './pages/Calculator';
+import Calculator from './pages/calculator/calculator.component';
 import Graph from './pages/Graph';
 import Amortization from './pages/Amortization';
 import AboutUs from './pages/about/about.component';
