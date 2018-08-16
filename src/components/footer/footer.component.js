@@ -10,7 +10,6 @@ import {
 import PropTypes from 'prop-types';
 import styles from './footer.styled';
 import Global from '../../pages/Global';
-import {ImageBackground} from "react-native";
 
 export default class CustomFooter extends Component {
     static get propTypes() {
@@ -40,7 +39,7 @@ export default class CustomFooter extends Component {
             <Footer>
                 <FooterTab style={{ backgroundColor: '#004567' }}>
                     <Button
-                        style={styles.bottomButton}
+                        style={[styles.bottomButton, styles.addRightBorder]}
                         transparent
                         onPress={() => navigate('Calculator')}
                     >
@@ -49,7 +48,7 @@ export default class CustomFooter extends Component {
                     </Button>
 
                     <Button
-                        style={styles.bottomButton}
+                        style={[styles.bottomButton, styles.addRightBorder]}
                         transparent
                         onPress={() => this.onTable()}
                     >
@@ -58,7 +57,7 @@ export default class CustomFooter extends Component {
                     </Button>
 
                     <Button
-                        style={styles.bottomButton}
+                        style={[styles.bottomButton, styles.addRightBorder]}
                         transparent
                         onPress={() => this.onGraph()}
                     >
