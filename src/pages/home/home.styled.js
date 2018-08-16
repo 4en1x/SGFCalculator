@@ -24,15 +24,4 @@ export default StyleSheet.create({
         shadowRadius: 10,
         shadowOpacity: 0.35,
     },
-
-    bottomButton: {
-        borderRadius: 20,
-        alignItems: 'center',
-        backgroundColor: '#1b4567',
-    },
-
-    textContainer: {
-        color: '#ffffff',
-        alignItems: 'center',
-    },
 });

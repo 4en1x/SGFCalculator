@@ -1,9 +1,9 @@
 import { createStackNavigator } from 'react-navigation';
-import Home from './components/home/home.component';
-import Calculator from './components/Calculator';
-import Graph from './components/Graph';
-import Amortization from './components/Amortization';
-import AboutUs from './components/about/about.component';
+import Home from './pages/home/home.component';
+import Calculator from './pages/Calculator';
+import Graph from './pages/Graph';
+import Amortization from './pages/Amortization';
+import AboutUs from './pages/about/about.component';
 
 
 export default createStackNavigator({

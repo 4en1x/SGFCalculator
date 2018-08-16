@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import {
     Container,
-    Footer,
-    Button,
-    FooterTab,
-    Icon,
     Text,
     Content,
 } from 'native-base';
@@ -15,7 +11,7 @@ import {
 
 import PropTypes from 'prop-types';
 import styles from './about.styled';
-import Global from '../Global';
+import CustomFooter from '../../components/footer/footer.component';
 
 class AboutUs extends Component {
     constructor(props) {
@@ -71,21 +67,7 @@ class AboutUs extends Component {
         Linking.openURL('mailto:admin@sgf.com.au');
     }
 
-    onGraph() {
-        if (Global.maxY > 1) {
-            this.props.navigation.navigate('Graph');
-        }
-    }
-
-    onAmortization() {
-        if (Global.tableData.length > 1) {
-            this.props.navigation.navigate('Amortization');
-        }
-    }
-
     render() {
-        const { navigate } = this.props.navigation;
-
         return (
             <Container>
                 <ImageBackground source={require('../../assets/images/home.png')} style={{ flex: 1 }}>
@@ -121,28 +103,7 @@ class AboutUs extends Component {
                         </TouchableOpacity>
                     </Content>
 
-                    <Footer>
-                        <FooterTab style = {{ backgroundColor: '#004567' }}>
-                            <Button style={styles.bottomButton} transparent onPress = {() => navigate('Calculator')}>
-                                <Icon style={{ color: '#ffffff' }} type="FontAwesome" name="calculator" />
-                                <Text style = {{ color: '#ffffff' }}>Calculator</Text>
-                            </Button>
-
-                            <Button style={styles.bottomButton} transparent onPress = {() => this.onAmortization()}>
-                                <Icon style={{ color: '#ffffff' }} type="FontAwesome" name="file-text" />
-                                <Text style = {{ color: '#ffffff' }}>Table</Text>
-                            </Button>
-
-                            <Button style={styles.bottomButton} transparent onPress = {() => this.onGraph()}>
-                                <Icon style={{ color: '#ffffff' }} type="FontAwesome" name="bar-chart" />
-                                <Text style = {{ color: '#ffffff' }}>Graph</Text>
-                            </Button>
-                            <Button style={styles.bottomButton} transparent onPress = {() => navigate('AboutUs')}>
-                                <Icon style={{ color: '#ffffff' }} type="FontAwesome" name="user" />
-                                <Text style = {{ color: '#ffffff' }}>About us</Text>
-                            </Button>
-                        </FooterTab>
-                    </Footer>
+                    <CustomFooter navigation={this.props.navigation}/>
                 </ImageBackground>
             </Container>
         );
