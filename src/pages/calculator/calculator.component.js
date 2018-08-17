@@ -270,7 +270,7 @@ class Calculator extends Component {
         const resultAddition = this.state.potential_addition * (((1 + RperN) ** (this.state.m_potentialaddition * this.state.m_time * this.state.potential_duration) - 1) / (RperN));
 
         result += resultAddition;
-        result = result.toFixed(0);
+        result = result.toFixed(2);
 
         this.setState({ potentialTotal: result.toString() });
     }
@@ -461,17 +461,9 @@ class Calculator extends Component {
                             <Text style = {{ marginLeft: 10, color: '#ffffff' }}>Compound</Text>
                             <Dropdown
                                 textColor = '#ffffff'
-                                containerStyle={{
-                                    borderWidth: 1,
-                                    borderColor: 'lightgrey',
-                                    backgroundColor: '#101010',
-                                    borderRadius: 5,
-                                    width: 150,
-                                    height: 35,
-                                    paddingLeft: 20,
-                                }}
+                                containerStyle={styles.dropdownContainer}
                                 rippleCentered={true}
-                                inputContainerStyle={{ marginTop: -28, borderBottomColor: 'transparent' }}
+                                inputContainerStyle={styles.dropdownInputContainer}
                                 data={compoundUnit}
                                 selectedItemColor='#0000ff'
                                 onChangeText = {text => this.onChangeCompoundUnit(text)}
@@ -497,17 +489,9 @@ class Calculator extends Component {
 
                             <Dropdown
                                 textColor = '#ffffff'
-                                containerStyle={{
-                                    borderWidth: 1,
-                                    borderColor: 'lightgrey',
-                                    backgroundColor: '#101010',
-                                    borderRadius: 5,
-                                    width: 150,
-                                    height: 35,
-                                    paddingLeft: 20,
-                                }}
+                                containerStyle={styles.dropdownContainer}
                                 rippleCentered={true}
-                                inputContainerStyle={{ marginTop: -28, borderBottomColor: 'transparent' }}
+                                inputContainerStyle={styles.dropdownInputContainer}
                                 data={durationUnit}
                                 selectedItemColor='#0000ff'
                                 onChangeText = {text => this.onChangeDurationUnit(text)}
@@ -533,17 +517,9 @@ class Calculator extends Component {
 
                             <Dropdown
                                 textColor = '#ffffff'
-                                containerStyle={{
-                                    borderWidth: 1,
-                                    borderColor: 'lightgrey',
-                                    backgroundColor: '#101010',
-                                    borderRadius: 5,
-                                    width: 150,
-                                    height: 35,
-                                    paddingLeft: 20,
-                                }}
+                                containerStyle={styles.dropdownContainer}
                                 rippleCentered={true}
-                                inputContainerStyle={{ marginTop: -28, borderBottomColor: 'transparent' }}
+                                inputContainerStyle={styles.dropdownInputContainer}
                                 data={compoundUnit}
                                 selectedItemColor='#0000ff'
                                 disabledItemColor= '#ffff00'
@@ -617,17 +593,9 @@ class Calculator extends Component {
                             <Text style = {{ marginLeft: 10, color: '#ffffff' }}>Compound</Text>
                             <Dropdown
                                 textColor = '#ffffff'
-                                containerStyle={{
-                                    borderWidth: 1,
-                                    borderColor: 'lightgrey',
-                                    backgroundColor: '#101010',
-                                    borderRadius: 5,
-                                    width: 150,
-                                    height: 35,
-                                    paddingLeft: 20,
-                                }}
+                                containerStyle={styles.dropdownContainer}
                                 rippleCentered={true}
-                                inputContainerStyle={{ marginTop: -28, borderBottomColor: 'transparent' }}
+                                inputContainerStyle={styles.dropdownInputContainer}
                                 data={compoundUnit}
                                 selectedItemColor='#0000ff'
                                 onChangeText = {text => this.onChangePotentialCompoundUnit(text)}
@@ -670,17 +638,9 @@ class Calculator extends Component {
 
                             <Dropdown
                                 textColor = '#ffffff'
-                                containerStyle={{
-                                    borderWidth: 1,
-                                    borderColor: 'lightgrey',
-                                    backgroundColor: '#101010',
-                                    borderRadius: 5,
-                                    width: 150,
-                                    height: 35,
-                                    paddingLeft: 20,
-                                }}
+                                containerStyle={styles.dropdownContainer}
                                 rippleCentered={true}
-                                inputContainerStyle={{ marginTop: -28, borderBottomColor: 'transparent' }}
+                                inputContainerStyle={styles.dropdownInputContainer}
                                 data={compoundUnit}
                                 selectedItemColor='#0000ff'
                                 disabledItemColor= '#ffff00'

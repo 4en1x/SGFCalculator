@@ -49,6 +49,21 @@ export default StyleSheet.create({
         flex: 2,
     },
 
+    dropdownContainer: {
+        borderWidth: 1,
+        borderColor: 'lightgrey',
+        backgroundColor: '#101010',
+        borderRadius: 5,
+        width: 150,
+        height: 33,
+        paddingLeft: 20,
+    },
+
+    dropdownInputContainer: {
+        marginTop: -28,
+        borderBottomColor: 'transparent',
+    },
+
     btn_graph: {
         flex: 1,
         justifyContent: 'center',
