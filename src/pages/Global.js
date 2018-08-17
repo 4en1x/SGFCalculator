@@ -6,5 +6,5 @@ export default {
     maxY: 0,
     tableData: [],
     xAxis_label: 'Investment During',
-    tableHeaderDays: 'Years'
+    tableHeaderDays: 'Years',
 };

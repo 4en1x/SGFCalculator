@@ -9,10 +9,10 @@ import {
 } from 'react-native';
 
 import { Dropdown } from 'react-native-material-dropdown';
+import PropTypes from 'prop-types';
 import styles from './calculator.styled';
 import Global from '../Global';
 import CustomFooter from '../../components/footer/footer.component';
-import PropTypes from "prop-types";
 
 class Calculator extends Component {
     constructor(props) {
@@ -28,9 +28,9 @@ class Calculator extends Component {
             cur_inflation: null,
             cur_duration: null,
 
-            cur_compound_unit: 'annually',
-            cur_duration_unit: 'years',
-            cur_addition_unit: 'monthly',
+            cur_compound_unit: 'Annually',
+            cur_duration_unit: 'Years',
+            cur_addition_unit: 'Monthly',
 
             potential_principle: null,
             potential_addition: null,
@@ -39,9 +39,9 @@ class Calculator extends Component {
             potential_inflation: null,
             potential_duration: null,
 
-            potential_compound_unit: 'annually',
-            potential_duration_unit: 'years',
-            potential_addition_unit: 'monthly',
+            potential_compound_unit: 'Annually',
+            potential_duration_unit: 'Years',
+            potential_addition_unit: 'Monthly',
 
             m_time: 1,
             m_potentialcompound: 1,
@@ -91,12 +91,12 @@ class Calculator extends Component {
     }
 
     onChangeCurInterest(text) {
-        this.setState({ cur_interest: parseInt(text, 10) / 100 });
+        this.setState({ cur_interest: parseInt(text) / 100 });
         this.onCurrentInvestment();
     }
 
     onChangeCurInflation(text) {
-        this.setState({ cur_inflation: parseInt(text, 10) / 100 });
+        this.setState({ cur_inflation: parseInt(text) / 100 });
         this.onCurrentInvestment();
     }
 
@@ -140,35 +140,35 @@ class Calculator extends Component {
             this.setState({ cur_addition: 0 });
         }
 
-        if (this.state.cur_addition_unit === 'daily') {
+        if (this.state.cur_addition_unit === 'Daily') {
             this.setState({ m_curaddition: 365 });
-        } else if (this.state.cur_addition_unit === 'monthly') {
+        } else if (this.state.cur_addition_unit === 'Monthly') {
             this.setState({ m_curaddition: 12 });
-        } else if (this.state.cur_addition_unit === 'quarterly') {
+        } else if (this.state.cur_addition_unit === 'Quarterly') {
             this.setState({ m_curaddition: 4 });
-        } else if (this.state.cur_addition_unit === 'semiannually') {
+        } else if (this.state.cur_addition_unit === 'Semiannually') {
             this.setState({ m_curaddition: 2 });
-        } else if (this.state.cur_addition_unit === 'annually') {
+        } else if (this.state.cur_addition_unit === 'Annually') {
             this.setState({ m_curaddition: 1 });
         }
 
-        if (this.state.cur_compound_unit === 'daily') {
+        if (this.state.cur_compound_unit === 'Daily') {
             this.setState({ m_curcompound: 365 });
-        } else if (this.state.cur_compound_unit === 'monthly') {
+        } else if (this.state.cur_compound_unit === 'Monthly') {
             this.setState({ m_curcompound: 12 });
-        } else if (this.state.cur_compound_unit === 'quarterly') {
+        } else if (this.state.cur_compound_unit === 'Quarterly') {
             this.setState({ m_curcompound: 4 });
-        } else if (this.state.cur_compound_unit === 'semiannually') {
+        } else if (this.state.cur_compound_unit === 'Semiannually') {
             this.setState({ m_curcompound: 2 });
-        } else if (this.state.cur_compound_unit === 'annually') {
+        } else if (this.state.cur_compound_unit === 'Annually') {
             this.setState({ m_curcompound: 1 });
         }
 
-        if (this.state.cur_duration_unit === 'days') {
+        if (this.state.cur_duration_unit === 'Days') {
             this.setState({ m_time: 1 / 365 });
-        } else if (this.state.cur_duration_unit === 'months') {
+        } else if (this.state.cur_duration_unit === 'Months') {
             this.setState({ m_time: 1 / 12 });
-        } else if (this.state.cur_duration_unit === 'years') {
+        } else if (this.state.cur_duration_unit === 'Years') {
             this.setState({ m_time: 1 });
         }
 
@@ -185,12 +185,12 @@ class Calculator extends Component {
     }
 
     onChangePotentialInterest(text) {
-        this.setState({ potential_interest: parseInt(text, 10) / 100 });
+        this.setState({ potential_interest: parseInt(text) / 100 });
         this.onPotentialInvestment();
     }
 
     onChangePotentialInflation(text) {
-        this.setState({ potential_inflation: parseInt(text, 10) / 100 });
+        this.setState({ potential_inflation: parseInt(text) / 100 });
         this.onPotentialInvestment();
     }
 
@@ -220,35 +220,35 @@ class Calculator extends Component {
             this.setState({ potential_addition: 0 });
         }
 
-        if (this.state.potential_addition_unit === 'daily') {
+        if (this.state.potential_addition_unit === 'Daily') {
             this.setState({ m_potentialaddition: 365 });
-        } else if (this.state.potential_addition_unit === 'monthly') {
+        } else if (this.state.potential_addition_unit === 'Monthly') {
             this.setState({ m_potentialaddition: 12 });
-        } else if (this.state.potential_addition_unit === 'quarterly') {
+        } else if (this.state.potential_addition_unit === 'Quarterly') {
             this.setState({ m_potentialaddition: 4 });
-        } else if (this.state.potential_addition_unit === 'semiannually') {
+        } else if (this.state.potential_addition_unit === 'Semiannually') {
             this.setState({ m_potentialaddition: 2 });
-        } else if (this.state.potential_addition_unit === 'annually') {
+        } else if (this.state.potential_addition_unit === 'Annually') {
             this.setState({ m_potentialaddition: 1 });
         }
 
-        if (this.state.potential_compound_unit === 'daily') {
+        if (this.state.potential_compound_unit === 'Daily') {
             this.setState({ m_potentialcompound: 365 });
-        } else if (this.state.potential_compound_unit === 'monthly') {
+        } else if (this.state.potential_compound_unit === 'Monthly') {
             this.setState({ m_potentialcompound: 12 });
-        } else if (this.state.potential_compound_unit === 'quarterly') {
+        } else if (this.state.potential_compound_unit === 'Quarterly') {
             this.setState({ m_potentialcompound: 4 });
-        } else if (this.state.potential_compound_unit === 'semiannually') {
+        } else if (this.state.potential_compound_unit === 'Semiannually') {
             this.setState({ m_potentialcompound: 2 });
-        } else if (this.state.potential_compound_unit === 'annually') {
+        } else if (this.state.potential_compound_unit === 'Annually') {
             this.setState({ m_potentialcompound: 1 });
         }
 
-        if (this.state.cur_duration_unit === 'days') {
+        if (this.state.cur_duration_unit === 'Days') {
             this.setState({ m_time: 1 / 365 });
-        } else if (this.state.cur_duration_unit === 'months') {
+        } else if (this.state.cur_duration_unit === 'Months') {
             this.setState({ m_time: 1 / 12 });
-        } else if (this.state.cur_duration_unit === 'years') {
+        } else if (this.state.cur_duration_unit === 'Years') {
             this.setState({ m_time: 1 });
         }
 
@@ -270,11 +270,11 @@ class Calculator extends Component {
         let m_time_tmp = this.state.m_time;
 
         if (this.state.potential_duration < 5) {
-            if (this.state.cur_duration_unit === 'months') {
+            if (this.state.cur_duration_unit === 'Months') {
                 days *= 30;
                 Global.xAxis_label = 'Investment During (days)';
                 m_time_tmp = 1 / 365;
-            } else if (this.state.cur_duration_unit === 'years') {
+            } else if (this.state.cur_duration_unit === 'Years') {
                 days *= 12;
                 m_time_tmp = 1 / 12;
                 Global.xAxis_label = 'Investment During (months)';
@@ -323,14 +323,14 @@ class Calculator extends Component {
         let m_time_tmp = this.state.m_time;
 
         if (this.state.potential_duration < 8) {
-            if (this.state.cur_duration_unit === 'months') {
+            if (this.state.cur_duration_unit === 'Months') {
                 days *= 30;
                 m_time_tmp = 1 / 365;
-                Global.tableHeaderDays = 'days';
-            } else if (this.state.cur_duration_unit === 'years') {
+                Global.tableHeaderDays = 'Days';
+            } else if (this.state.cur_duration_unit === 'Years') {
                 days *= 12;
                 m_time_tmp = 1 / 12;
-                Global.tableHeaderDays = 'months';
+                Global.tableHeaderDays = 'Months';
             }
         } else { Global.tableHeaderDays = this.state.cur_duration_unit; }
 
@@ -361,24 +361,22 @@ class Calculator extends Component {
 
     render() {
         const compoundUnit = [
-            { value: 'daily' },
-            { value: 'monthly' },
-            { value: 'quarterly' },
-            { value: 'semiannually' },
-            { value: 'annually' },
+            { value: 'Daily' },
+            { value: 'Monthly' },
+            { value: 'Quarterly' },
+            { value: 'Semiannually' },
+            { value: 'Annually' },
         ];
 
         const durationUnit = [
-            { value: 'days' },
-            { value: 'months' },
-            { value: 'years' },
+            { value: 'Days' },
+            { value: 'Months' },
+            { value: 'Years' },
         ];
 
         return (
             <Container>
                 <ImageBackground source = {require('../../assets/images/calculator.png')} style={{ flex: 1 }}>
-
-
                     <Content>
                         <View style = {{ marginTop: 10, marginBottom: 10, alignItems: 'center' }}>
                             <Text style = {{ color: '#ffffff', fontSize: 20 }}>
@@ -387,7 +385,7 @@ class Calculator extends Component {
                         </View>
 
                         <View style = {styles.first}>
-                            <Text style = {{ marginTop: 15, marginLeft: 10, color: '#ffffff' }}> Principal($) </Text>
+                            <Text style = {{ marginLeft: 10, color: '#ffffff' }}>Principal</Text>
                             <TextInput style = {styles.input1}
                                 underlineColorAndroid = "transparent"
                                 placeholder = "0"
@@ -400,8 +398,8 @@ class Calculator extends Component {
                             />
                         </View>
 
-                        <View style = {styles.second}>
-                            <Text style = {{ marginTop: 15, marginLeft: 10, color: '#ffffff' }}> Interest(%) </Text>
+                        <View style={styles.second}>
+                            <Text style = {{ marginLeft: 10, color: '#ffffff' }}>Interest</Text>
                             <TextInput style = {styles.input2}
                                 underlineColorAndroid = "transparent"
                                 placeholder = "0"
@@ -409,11 +407,11 @@ class Calculator extends Component {
                                 autoCapitalize = "none"
                                 keyboardType = 'numeric'
                                 onChangeText = {text => this.onChangeCurInterest(text)}
-                                value = { this.state.cur_interest}
+                                value={this.state.cur_interest}
                                 maxLength={11}
                             />
 
-                            <Text style = {{ marginTop: 15, marginLeft: 10, color: '#ffffff' }}> Inflation(%) </Text>
+                            <Text style = {{ color: '#ffffff' }}>Inflation</Text>
                             <TextInput style = {styles.input2}
                                 underlineColorAndroid = "transparent"
                                 placeholder = "0"
@@ -425,75 +423,70 @@ class Calculator extends Component {
                                 maxLength={11}
                             />
                         </View>
-                        <View style = {[styles.first, { justifyContent: 'flex-end' }]}>
 
-                            <Text style = {{ marginTop: 15, marginRight: 40, color: '#ffffff' }}> Compound </Text>
-
-                            <View style = {{ marginRight: 15, width: 150 }}>
-                                <Dropdown
-                                    textColor = '#ffffff'
-                                    containerStyle={{
-                                        marginTop: 15, borderWidth: 1, borderColor: 'lightgrey', backgroundColor: '#101010', borderRadius: 5, width: 150, height: 40, paddingLeft: 20,
-                                    }}
-                                    rippleCentered={true}
-                                    inputContainerStyle={{ marginTop: -20, borderBottomColor: 'transparent' }}
-                                    data={compoundUnit}
-                                    selectedItemColor='#0000ff'
-
-                                    onChangeText = {text => this.onChangeCompoundUnit(text)}
-
-                                    disabledItemColor= '#ffff00'
-                                    pickerStyle = {{ backgroundColor: '#ffffff' }}
-                                    value = "annually"
-                                    baseColor = '#ffffff'
-
-                                />
-                            </View>
-
+                        <View style = {[styles.first, { paddingRight: 15 }]}>
+                            <Text style = {{ marginLeft: 10, color: '#ffffff' }}>Compound</Text>
+                            <Dropdown
+                                textColor = '#ffffff'
+                                containerStyle={{
+                                    borderWidth: 1,
+                                    borderColor: 'lightgrey',
+                                    backgroundColor: '#101010',
+                                    borderRadius: 5,
+                                    width: 150,
+                                    height: 40,
+                                    paddingLeft: 20,
+                                }}
+                                rippleCentered={true}
+                                inputContainerStyle={{ marginTop: -28, borderBottomColor: 'transparent' }}
+                                data={compoundUnit}
+                                selectedItemColor='#0000ff'
+                                onChangeText = {text => this.onChangeCompoundUnit(text)}
+                                disabledItemColor= '#ffff00'
+                                pickerStyle = {{ backgroundColor: '#ffffff' }}
+                                value = "Annually"
+                                baseColor = '#ffffff'
+                            />
                         </View>
 
-
-                        <View style = {styles.second}>
-                            <Text style = {{ marginTop: 15, marginLeft: 10, color: '#ffffff' }}> Duration </Text>
+                        <View style = {[styles.second, { paddingRight: 15 }]}>
+                            <Text style = {{ marginLeft: 10, color: '#ffffff' }}>Duration</Text>
                             <TextInput style = {styles.input2}
                                 underlineColorAndroid = "transparent"
                                 placeholder = "0"
                                 placeholderTextColor = "#ffffff"
                                 autoCapitalize = "none"
-
                                 keyboardType = 'numeric'
-
                                 onChangeText = {text => this.onChangeCurDuration(text)}
                                 value = { this.state.cur_duration}
                                 maxLength={11}
                             />
 
-                            <View style = {{ marginRight: 15, width: 150 }}>
-                                <Dropdown
-                                    textColor = '#ffffff'
-                                    containerStyle={{
-                                        marginTop: 15, borderWidth: 1, borderColor: 'lightgrey', backgroundColor: '#101010', borderRadius: 5, width: 150, height: 40, paddingLeft: 20,
-                                    }}
-                                    rippleCentered={true}
-                                    inputContainerStyle={{ marginTop: -20, borderBottomColor: 'transparent' }}
-
-                                    data={durationUnit}
-                                    selectedItemColor='#0000ff'
-
-                                    onChangeText = {text => this.onChangeDurationUnit(text)}
-
-                                    disabledItemColor= '#ffff00'
-                                    pickerStyle = {{ backgroundColor: '#ffffff' }}
-                                    value = "years"
-                                    baseColor = '#ffffff'
-
-                                />
-                            </View>
+                            <Dropdown
+                                textColor = '#ffffff'
+                                containerStyle={{
+                                    borderWidth: 1,
+                                    borderColor: 'lightgrey',
+                                    backgroundColor: '#101010',
+                                    borderRadius: 5,
+                                    width: 150,
+                                    height: 40,
+                                    paddingLeft: 20,
+                                }}
+                                rippleCentered={true}
+                                inputContainerStyle={{ marginTop: -28, borderBottomColor: 'transparent' }}
+                                data={durationUnit}
+                                selectedItemColor='#0000ff'
+                                onChangeText = {text => this.onChangeDurationUnit(text)}
+                                disabledItemColor= '#ffff00'
+                                pickerStyle = {{ backgroundColor: '#ffffff' }}
+                                value = "Years"
+                                baseColor = '#ffffff'
+                            />
                         </View>
 
-                        <View style = {styles.first}>
-
-                            <Text style = {{ marginTop: 15, marginLeft: 10, color: '#ffffff' }}> Addition($) </Text>
+                        <View style={[styles.first, { paddingRight: 15 }]}>
+                            <Text style = {{ marginLeft: 10, color: '#ffffff' }}>Addition</Text>
                             <TextInput style = {styles.input2}
                                 underlineColorAndroid = "transparent"
                                 placeholder = "0"
@@ -505,29 +498,31 @@ class Calculator extends Component {
                                 maxLength={11}
                             />
 
-                            <View style = {{ marginRight: 15, width: 150 }}>
-                                <Dropdown
-                                    textColor = '#ffffff'
-                                    containerStyle={{
-                                        marginTop: 15, borderWidth: 1, borderColor: 'lightgrey', backgroundColor: '#101010', borderRadius: 5, width: 150, height: 40, paddingLeft: 20,
-                                    }}
-                                    rippleCentered={true}
-                                    inputContainerStyle={{ marginTop: -20, borderBottomColor: 'transparent' }}
-                                    data={compoundUnit}
-                                    selectedItemColor	='#0000ff'
-
-                                    disabledItemColor= '#ffff00'
-                                    onChangeText = {text => this.onChangeCurAdditionUnit(text)}
-
-                                    pickerStyle = {{ backgroundColor: '#ffffff' }}
-                                    value = "monthly"
-                                    baseColor = '#ffffff'
-                                />
-                            </View>
+                            <Dropdown
+                                textColor = '#ffffff'
+                                containerStyle={{
+                                    borderWidth: 1,
+                                    borderColor: 'lightgrey',
+                                    backgroundColor: '#101010',
+                                    borderRadius: 5,
+                                    width: 150,
+                                    height: 40,
+                                    paddingLeft: 20,
+                                }}
+                                rippleCentered={true}
+                                inputContainerStyle={{ marginTop: -28, borderBottomColor: 'transparent' }}
+                                data={compoundUnit}
+                                selectedItemColor='#0000ff'
+                                disabledItemColor= '#ffff00'
+                                onChangeText = {text => this.onChangeCurAdditionUnit(text)}
+                                pickerStyle = {{ backgroundColor: '#ffffff' }}
+                                value = "Monthly"
+                                baseColor = '#ffffff'
+                            />
                         </View>
 
                         <View style = {styles.second}>
-                            <Text style = {{ marginTop: 15, marginLeft: 10, color: '#ffffff' }}> Total Return </Text>
+                            <Text style = {{ marginLeft: 10, color: '#ffffff' }}>Total Return</Text>
                             <TextInput style = {styles.input1}
                                 underlineColorAndroid = "transparent"
                                 placeholder = "0"
@@ -536,10 +531,9 @@ class Calculator extends Component {
                                 editable={false}
                                 selectTextOnFocus={false}
                                 ref={component => this._curTotal = component}
-
                             />
-
                         </View>
+
 
                         <View style = {{ marginTop: 10, marginBottom: 10, alignItems: 'center' }}>
                             <Text style = {{ color: '#ffffff', fontSize: 20 }}>
@@ -548,15 +542,12 @@ class Calculator extends Component {
                         </View>
 
                         <View style = {styles.first}>
-
-
-                            <Text style = {{ marginTop: 15, marginLeft: 10, color: '#ffffff' }}> Principal($) </Text>
+                            <Text style = {{ marginLeft: 10, color: '#ffffff' }}>Principal</Text>
                             <TextInput style = {styles.input1}
                                 underlineColorAndroid = "transparent"
                                 placeholder = "0"
                                 placeholderTextColor = "#ffffff"
                                 autoCapitalize = "none"
-
                                 editable={false}
                                 selectTextOnFocus={false}
                                 ref={component => this._potentialPrincipal = component}
@@ -564,7 +555,7 @@ class Calculator extends Component {
                         </View>
 
                         <View style = {styles.second}>
-                            <Text style = {{ marginTop: 15, marginLeft: 10, color: '#ffffff' }}> Interest(%) </Text>
+                            <Text style = {{ marginLeft: 10, color: '#ffffff' }}>Interest</Text>
                             <TextInput style = {styles.input2}
                                 underlineColorAndroid = "transparent"
                                 placeholder = "0"
@@ -576,7 +567,7 @@ class Calculator extends Component {
                                 maxLength={11}
                             />
 
-                            <Text style = {{ marginTop: 15, marginLeft: 10, color: '#ffffff' }}> Inflation(%) </Text>
+                            <Text style = {{ marginLeft: 10, color: '#ffffff' }}>Inflation</Text>
                             <TextInput style = {styles.input2}
                                 underlineColorAndroid = "transparent"
                                 placeholder = "0"
@@ -588,93 +579,87 @@ class Calculator extends Component {
                                 maxLength={11}
                             />
                         </View>
-                        <View style = {[styles.first, { justifyContent: 'flex-end' }]}>
 
-                            <Text style = {{ marginTop: 15, marginRight: 40, color: '#ffffff' }}> Compound </Text>
-
-                            <View style = {{ marginRight: 15, width: 150 }}>
-                                <Dropdown
-                                    textColor = '#ffffff'
-                                    containerStyle={{
-                                        marginTop: 15, borderWidth: 1, borderColor: 'lightgrey', backgroundColor: '#101010', borderRadius: 5, width: 150, height: 40, paddingLeft: 20,
-                                    }}
-                                    rippleCentered={true}
-                                    inputContainerStyle={{ marginTop: -20, borderBottomColor: 'transparent' }}
-                                    data={compoundUnit}
-                                    selectedItemColor='#0000ff'
-
-                                    onChangeText = {text => this.onChangePotentialCompoundUnit(text)}
-
-                                    disabledItemColor= '#ffff00'
-                                    pickerStyle = {{ backgroundColor: '#ffffff' }}
-                                    value = "annually"
-                                    baseColor = '#ffffff'
-
-                                />
-                            </View>
-
+                        <View style={[styles.first, { paddingRight: 15 }]}>
+                            <Text style = {{ marginLeft: 10, color: '#ffffff' }}>Compound</Text>
+                            <Dropdown
+                                textColor = '#ffffff'
+                                containerStyle={{
+                                    borderWidth: 1,
+                                    borderColor: 'lightgrey',
+                                    backgroundColor: '#101010',
+                                    borderRadius: 5,
+                                    width: 150,
+                                    height: 40,
+                                    paddingLeft: 20,
+                                }}
+                                rippleCentered={true}
+                                inputContainerStyle={{ marginTop: -28, borderBottomColor: 'transparent' }}
+                                data={compoundUnit}
+                                selectedItemColor='#0000ff'
+                                onChangeText = {text => this.onChangePotentialCompoundUnit(text)}
+                                disabledItemColor= '#ffff00'
+                                pickerStyle = {{ backgroundColor: '#ffffff' }}
+                                value = "Annually"
+                                baseColor = '#ffffff'
+                            />
                         </View>
 
-
-                        <View style = {styles.second}>
-                            <Text style = {{ marginTop: 15, marginLeft: 10, color: '#ffffff' }}> Duration </Text>
-                            <TextInput style = {styles.input2}
-                                underlineColorAndroid = "transparent"
-                                placeholder = "0"
+                        <View style={[styles.second, { paddingRight: 15 }]}>
+                            <Text style={{ marginLeft: 10, color: '#ffffff' }}>Duration</Text>
+                            <TextInput style={styles.input2}
+                                underlineColorAndroid="transparent"
+                                placeholder="0"
                                 placeholderTextColor = "#ffffff"
                                 autoCapitalize = "none"
-
-
                                 editable={false}
                                 selectTextOnFocus={false}
                                 ref={component => this._potentialDuration = component}
                             />
 
-                            <View style = {{ marginRight: 15, width: 150 }}>
-                                <Text style = {{ marginTop: 15, marginLeft: 10, color: '#ffffff' }}>
-                                    {this.state.potential_duration_unit}
-
-                                </Text>
-                            </View>
+                            <Text style = {{ marginLeft: 10, color: '#ffffff' }}>
+                                {this.state.potential_duration_unit}
+                            </Text>
                         </View>
 
-                        <View style = {styles.first}>
-
-                            <Text style = {{ marginTop: 15, marginLeft: 10, color: '#ffffff' }}> Addition($) </Text>
-                            <TextInput style = {styles.input2}
-                                underlineColorAndroid = "transparent"
-                                placeholder = "0"
-                                placeholderTextColor = "#ffffff"
-                                autoCapitalize = "none"
-                                keyboardType = 'numeric'
-                                onChangeText = {text => this.onChangePotentialAddition(text)}
-                                value = { this.state.cur_addition}
+                        <View style={[styles.first, { paddingRight: 15 }]}>
+                            <Text style={{ marginLeft: 10, color: '#ffffff' }}>Addition</Text>
+                            <TextInput style={styles.input2}
+                                underlineColorAndroid="transparent"
+                                placeholder="0"
+                                placeholderTextColor="#ffffff"
+                                autoCapitalize="none"
+                                keyboardType='numeric'
+                                onChangeText={text => this.onChangePotentialAddition(text)}
+                                value={this.state.cur_addition}
                                 maxLength={11}
                             />
 
-                            <View style = {{ marginRight: 15, width: 150 }}>
-                                <Dropdown
-                                    textColor = '#ffffff'
-                                    containerStyle={{
-                                        marginTop: 15, borderWidth: 1, borderColor: 'lightgrey', backgroundColor: '#101010', borderRadius: 5, width: 150, height: 40, paddingLeft: 20,
-                                    }}
-                                    rippleCentered={true}
-                                    inputContainerStyle={{ marginTop: -20, borderBottomColor: 'transparent' }}
-                                    data={compoundUnit}
-                                    selectedItemColor	='#0000ff'
-
-                                    disabledItemColor= '#ffff00'
-                                    onChangeText = {text => this.onChangePotentialAdditionUnit(text)}
-
-                                    pickerStyle = {{ backgroundColor: '#ffffff' }}
-                                    value = "monthly"
-                                    baseColor = '#ffffff'
-                                />
-                            </View>
+                            <Dropdown
+                                textColor = '#ffffff'
+                                containerStyle={{
+                                    borderWidth: 1,
+                                    borderColor: 'lightgrey',
+                                    backgroundColor: '#101010',
+                                    borderRadius: 5,
+                                    width: 150,
+                                    height: 40,
+                                    paddingLeft: 20,
+                                }}
+                                rippleCentered={true}
+                                inputContainerStyle={{ marginTop: -28, borderBottomColor: 'transparent' }}
+                                data={compoundUnit}
+                                selectedItemColor='#0000ff'
+                                disabledItemColor= '#ffff00'
+                                onChangeText = {text => this.onChangePotentialAdditionUnit(text)}
+                                pickerStyle = {{ backgroundColor: '#ffffff' }}
+                                value = "Monthly"
+                                baseColor = '#ffffff'
+                            />
                         </View>
 
-                        <View style = {styles.second}>
-                            <Text style = {{ marginTop: 15, marginLeft: 10, color: '#ffffff' }}> Total Return </Text>
+                        <View style={[styles.second, { paddingRight: 15 }]}>
+                            <Text style = {{ marginLeft: 10, color: '#ffffff' }}>Total Return</Text>
                             <TextInput style = {styles.input1}
                                 underlineColorAndroid = "transparent"
                                 placeholder = "0"
@@ -683,7 +668,6 @@ class Calculator extends Component {
                                 editable={false}
                                 selectTextOnFocus={false}
                                 ref={component => this._potentialTotal = component}
-
                             />
                         </View>
 
@@ -698,10 +682,7 @@ class Calculator extends Component {
 
                     <CustomFooter navigation={this.props.navigation}/>
                 </ImageBackground>
-
             </Container>
-
-
         );
     }
 }

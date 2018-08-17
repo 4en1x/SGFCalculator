@@ -8,20 +8,24 @@ export default StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         marginTop: 0,
-        height: 70,
+        height: 60,
         backgroundColor: '#63656e',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
 
     second: {
         flexDirection: 'row',
         marginTop: 0,
-        height: 70,
+        height: 60,
         backgroundColor: '#3f434e',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
 
     input1: {
         margin: 15,
-        height: 40,
+        height: 30,
         width: 250,
         color: '#ffffff',
         backgroundColor: '#101010',
@@ -34,8 +38,8 @@ export default StyleSheet.create({
 
     input2: {
         margin: 15,
-        height: 40,
-        width: 100,
+        height: 30,
+        width: 90,
         color: '#ffffff',
         backgroundColor: '#101010',
         borderColor: '#ffffff',

@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 import {
     Container,
-    Content,
+    Content, Text,
 } from 'native-base';
 
-import { Image, ImageBackground, TouchableOpacity } from 'react-native';
+import {Image, ImageBackground, TouchableOpacity, View} from 'react-native';
 import CustomFooter from '../../components/footer/footer.component';
 
 import styles from './home.styled';
@@ -44,12 +44,18 @@ class Home extends Component {
                     style={{ flex: 1 }}
                 >
                     <Content>
-                        <TouchableOpacity
-                            style={styles.button1}
-                            onPress={() => navigate('Calculator')}
-                        >
-                            <Image source={require('../../assets/images/btn_Return.png')} />
-                        </TouchableOpacity>
+                        <View style={styles.aboutBackground}>
+                            <TouchableOpacity
+                                style={styles.button1}
+                                onPress={() => navigate('Calculator')}
+                            >
+                                <Image source={require('../../assets/images/btn_Return.png')} />
+                            </TouchableOpacity>
+
+                            <Text style={styles.aboutText}>
+                                A tool to compare the result from alternative investment strategies.
+                            </Text>
+                        </View>
 
                         <TouchableOpacity
                             style={styles.button2}
