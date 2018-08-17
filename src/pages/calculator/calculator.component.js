@@ -21,22 +21,22 @@ class Calculator extends Component {
         this.state = {
             flag_param: 0,
 
-            cur_principle: null,
-            cur_addition: null,
-            cur_interest: null,
+            cur_principle: 0,
+            cur_addition: 0,
+            cur_interest: 0,
             cur_total: null,
-            cur_inflation: null,
+            cur_inflation: 0,
             cur_duration: null,
 
             cur_compound_unit: 'Annually',
             cur_duration_unit: 'Years',
             cur_addition_unit: 'Monthly',
 
-            potential_principle: null,
-            potential_addition: null,
-            potential_interest: null,
+            potential_principle: 0,
+            potential_addition: 0,
+            potential_interest: 0,
             potential_total: null,
-            potential_inflation: null,
+            potential_inflation: 0,
             potential_duration: null,
 
             potential_compound_unit: 'Annually',
@@ -48,6 +48,9 @@ class Calculator extends Component {
             m_curcompound: 1,
             m_curaddition: 12,
             m_potentialaddition: 12,
+
+            curTotal: 0,
+            potentialTotal: 0,
         };
     }
 
@@ -73,103 +76,107 @@ class Calculator extends Component {
         };
     }
 
-    onChangeCurPrinciple(text) {
-        this.setState({
-            cur_principle: text,
-            potential_principle: text,
+    async onChangeCurPrinciple(text) {
+        await this.setState({
+            cur_principle: parseFloat(text) || 0,
+            potential_principle: parseFloat(text) || 0,
         });
-
-        this._potentialPrincipal.setNativeProps({ text });
 
         this.onCurrentInvestment();
         this.onPotentialInvestment();
     }
 
-    onChangeCurAddition(text) {
-        this.setState({ cur_addition: text });
+    async onChangeCurAddition(text) {
+        await this.setState({ cur_addition: text });
         this.onCurrentInvestment();
     }
 
-    onChangeCurInterest(text) {
-        this.setState({ cur_interest: parseInt(text) / 100 });
+    async onChangeCurInterest(text) {
+        await this.setState({ cur_interest: parseFloat(text) / 100 || 0 });
         this.onCurrentInvestment();
     }
 
-    onChangeCurInflation(text) {
-        this.setState({ cur_inflation: parseInt(text) / 100 });
+    async onChangeCurInflation(text) {
+        await this.setState({ cur_inflation: parseFloat(text) / 100 || 0 });
         this.onCurrentInvestment();
     }
 
-    onChangeCurDuration(text) {
-        this.setState({
+    async onChangeCurDuration(text) {
+        await this.setState({
             cur_duration: text,
             potential_duration: text,
         });
 
-        this._potentialDuration.setNativeProps({ text });
+        await this._potentialDuration.setNativeProps({ text });
+
         this.onCurrentInvestment();
         this.onPotentialInvestment();
     }
 
-    onChangeCompoundUnit(text) {
-        this.setState({ cur_compound_unit: text });
+    async onChangeCompoundUnit(text) {
+        await this.setState({ cur_compound_unit: text });
         this.onCurrentInvestment();
     }
 
-    onChangeCurAdditionUnit(text) {
-        this.setState({ cur_duration_unit: text });
+    async onChangeCurAdditionUnit(text) {
+        await this.setState({ cur_duration_unit: text });
         this.onCurrentInvestment();
     }
 
-    onChangeDurationUnit(text) {
-        this.setState({
+    async onChangeDurationUnit(text) {
+        await this.setState({
             cur_duration_unit: text,
             potential_duration_unit: text,
         });
+
         this.onCurrentInvestment();
     }
 
-    onCurrentInvestment() {
+    async onCurrentInvestment() {
         if (this.state.cur_interest === null) return;
         if (this.state.cur_principle === null) return;
         if (this.state.cur_inflation === null) {
-            this.setState({ cur_inflation: 0 });
+            await this.setState({ cur_inflation: 0 });
         }
         if (this.state.cur_duration === null) return;
         if (this.state.cur_addition === null) {
-            this.setState({ cur_addition: 0 });
+            await this.setState({ cur_addition: 0 });
         }
 
         if (this.state.cur_addition_unit === 'Daily') {
-            this.setState({ m_curaddition: 365 });
+            await this.setState({ m_curaddition: 365 });
+        } else if (this.state.cur_addition_unit === 'Weekly') {
+            await this.setState({ m_curaddition: 52 });
         } else if (this.state.cur_addition_unit === 'Monthly') {
-            this.setState({ m_curaddition: 12 });
+            await this.setState({ m_curaddition: 12 });
         } else if (this.state.cur_addition_unit === 'Quarterly') {
-            this.setState({ m_curaddition: 4 });
-        } else if (this.state.cur_addition_unit === 'Semiannually') {
-            this.setState({ m_curaddition: 2 });
+            await this.setState({ m_curaddition: 4 });
+        } else if (this.state.cur_addition_unit === 'Semi-Annually') {
+            await this.setState({ m_curaddition: 2 });
         } else if (this.state.cur_addition_unit === 'Annually') {
-            this.setState({ m_curaddition: 1 });
+            await this.setState({ m_curaddition: 1 });
         }
 
         if (this.state.cur_compound_unit === 'Daily') {
-            this.setState({ m_curcompound: 365 });
+            await this.setState({ m_curcompound: 365 });
+        } else if (this.state.cur_addition_unit === 'Weekly') {
+            await this.setState({ m_curaddition: 52 });
         } else if (this.state.cur_compound_unit === 'Monthly') {
-            this.setState({ m_curcompound: 12 });
+            await this.setState({ m_curcompound: 12 });
         } else if (this.state.cur_compound_unit === 'Quarterly') {
-            this.setState({ m_curcompound: 4 });
-        } else if (this.state.cur_compound_unit === 'Semiannually') {
-            this.setState({ m_curcompound: 2 });
+            await this.setState({ m_curcompound: 4 });
+        } else if (this.state.cur_compound_unit === 'Semi-Annually') {
+            await this.setState({ m_curcompound: 2 });
         } else if (this.state.cur_compound_unit === 'Annually') {
-            this.setState({ m_curcompound: 1 });
+            await this.setState({ m_curcompound: 1 });
         }
 
         if (this.state.cur_duration_unit === 'Days') {
-            this.setState({ m_time: 1 / 365 });
+            await this.setState({ m_time: 1 / 365 });
         } else if (this.state.cur_duration_unit === 'Months') {
-            this.setState({ m_time: 1 / 12 });
+            await this.setState({ m_time: 1 / 12 });
         } else if (this.state.cur_duration_unit === 'Years') {
-            this.setState({ m_time: 1 });
+            await this.setState({ m_time: 1 });
         }
 
         const RperN = (this.state.cur_interest - this.state.cur_inflation)
@@ -181,75 +188,79 @@ class Calculator extends Component {
         result += resultAddition;
         result = result.toFixed(2);
 
-        this._curTotal.setNativeProps({ text: result.toString() });
+        this.setState({ curTotal: result.toString() });
     }
 
-    onChangePotentialInterest(text) {
-        this.setState({ potential_interest: parseInt(text) / 100 });
+    async onChangePotentialInterest(text) {
+        await this.setState({ potential_interest: parseFloat(text) / 100 || 0 });
         this.onPotentialInvestment();
     }
 
-    onChangePotentialInflation(text) {
-        this.setState({ potential_inflation: parseInt(text) / 100 });
+    async onChangePotentialInflation(text) {
+        await this.setState({ potential_inflation: parseFloat(text) / 100 || 0 });
         this.onPotentialInvestment();
     }
 
-    onChangePotentialCompoundUnit(text) {
-        this.setState({ potential_compound_unit: text });
+    async onChangePotentialCompoundUnit(text) {
+        await this.setState({ potential_compound_unit: text });
         this.onPotentialInvestment();
     }
 
-    onChangePotentialAddition(text) {
-        this.setState({ potential_addition: text });
+    async onChangePotentialAddition(text) {
+        await this.setState({ potential_addition: text });
         this.onPotentialInvestment();
     }
 
-    onChangePotentialAdditionUnit(text) {
-        this.setState({ potential_addition_unit: text });
+    async onChangePotentialAdditionUnit(text) {
+        await this.setState({ potential_addition_unit: text });
         this.onPotentialInvestment();
     }
 
-    onPotentialInvestment() {
+    async onPotentialInvestment() {
         if (this.state.potential_interest === null) return;
         if (this.state.potential_principle === null) return;
         if (this.state.potential_inflation === null) {
-            this.setState({ m_time: 1 / 365 });
+            await this.setState({ m_time: 1 / 365 });
         }
         if (this.state.potential_duration === null) return;
         if (this.state.potential_addition === null) {
-            this.setState({ potential_addition: 0 });
+            await this.setState({ potential_addition: 0 });
         }
 
         if (this.state.potential_addition_unit === 'Daily') {
-            this.setState({ m_potentialaddition: 365 });
+            await this.setState({ m_potentialaddition: 365 });
+        } else if (this.state.potential_addition_unit === 'Weekly') {
+            await this.setState({ m_potentialaddition: 52 });
         } else if (this.state.potential_addition_unit === 'Monthly') {
-            this.setState({ m_potentialaddition: 12 });
+            await this.setState({ m_potentialaddition: 12 });
         } else if (this.state.potential_addition_unit === 'Quarterly') {
-            this.setState({ m_potentialaddition: 4 });
-        } else if (this.state.potential_addition_unit === 'Semiannually') {
-            this.setState({ m_potentialaddition: 2 });
+            await this.setState({ m_potentialaddition: 4 });
+        } else if (this.state.potential_addition_unit === 'Semi-Annually') {
+            await this.setState({ m_potentialaddition: 2 });
         } else if (this.state.potential_addition_unit === 'Annually') {
-            this.setState({ m_potentialaddition: 1 });
+            await this.setState({ m_potentialaddition: 1 });
         }
 
         if (this.state.potential_compound_unit === 'Daily') {
-            this.setState({ m_potentialcompound: 365 });
+            await this.setState({ m_potentialcompound: 365 });
+        } else if (this.state.potential_addition_unit === 'Weekly') {
+            await this.setState({ m_potentialaddition: 52 });
         } else if (this.state.potential_compound_unit === 'Monthly') {
-            this.setState({ m_potentialcompound: 12 });
+            await this.setState({ m_potentialcompound: 12 });
         } else if (this.state.potential_compound_unit === 'Quarterly') {
-            this.setState({ m_potentialcompound: 4 });
-        } else if (this.state.potential_compound_unit === 'Semiannually') {
-            this.setState({ m_potentialcompound: 2 });
+            await this.setState({ m_potentialcompound: 4 });
+        } else if (this.state.potential_compound_unit === 'Semi-Annually') {
+            await this.setState({ m_potentialcompound: 2 });
         } else if (this.state.potential_compound_unit === 'Annually') {
-            this.setState({ m_potentialcompound: 1 });
+            await this.setState({ m_potentialcompound: 1 });
         }
 
         if (this.state.cur_duration_unit === 'Days') {
-            this.setState({ m_time: 1 / 365 });
+            await this.setState({ m_time: 1 / 365 });
         } else if (this.state.cur_duration_unit === 'Months') {
-            this.setState({ m_time: 1 / 12 });
+            await this.setState({ m_time: 1 / 12 });
         } else if (this.state.cur_duration_unit === 'Years') {
-            this.setState({ m_time: 1 });
+            await this.setState({ m_time: 1 });
         }
 
         const RperN = (this.state.potential_interest - this.state.potential_inflation)
@@ -261,7 +272,16 @@ class Calculator extends Component {
         result += resultAddition;
         result = result.toFixed(0);
 
-        this._potentialTotal.setNativeProps({ text: result.toString() });
+        this.setState({ potentialTotal: result.toString() });
+    }
+
+    makeResult(text) {
+        let returnText = text;
+        if (!text || isNaN(text)) {
+            returnText = '0';
+        }
+
+        return `$${returnText.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
     }
 
     onGraph() {
@@ -317,54 +337,66 @@ class Calculator extends Component {
         this.props.navigation.navigate('Graph');
     }
 
-    onAmortization() {
+    onTable() {
+        this.fillTableOne();
+        this.fillTableTwo();
+
+        if (Global.tableDataOne.length > 1 || Global.tableDataOne.length > 1) {
+            this.props.navigation.navigate('Table');
+        }
+    }
+
+    fillTableOne() {
+        let days = this.state.cur_duration;
+
+        let m_time_tmp = this.state.m_time;
+        Global.tableHeaderOneDays = this.state.cur_duration_unit;
+
+        Global.tableDataOne = [[0, `$${parseInt(this.state.cur_principle, 10)}`, '$0']];
+
+        let resultSGF = 0;
+
+        for (let i = 1; i <= days; i += 1) {
+            const RperNSGF = (this.state.cur_interest - this.state.cur_inflation) / this.state.m_curaddition;
+            resultSGF = this.state.cur_principle * (1 + (this.state.cur_interest - this.state.cur_inflation) / this.state.m_curcompound) ** (this.state.m_curcompound * m_time_tmp * i);
+            const resultAdditionSGF = this.state.cur_addition * (((1 + RperNSGF) ** (this.state.m_curaddition * m_time_tmp * i) - 1) / (RperNSGF));
+            resultSGF += resultAdditionSGF;
+            const deposite = this.state.cur_addition * this.state.m_curaddition * m_time_tmp * i;
+            let interestTotal = resultSGF - this.state.cur_principle - deposite;
+            interestTotal = interestTotal.toFixed(2);
+            Global.tableDataOne.push([i, `$${parseInt(resultSGF.toFixed(2), 10)}`, `$${interestTotal}`]);
+        }
+    }
+
+    fillTableTwo() {
         let days = this.state.potential_duration;
 
         let m_time_tmp = this.state.m_time;
+        Global.tableHeaderTwoDays = this.state.cur_duration_unit;
 
-        if (this.state.potential_duration < 8) {
-            if (this.state.cur_duration_unit === 'Months') {
-                days *= 30;
-                m_time_tmp = 1 / 365;
-                Global.tableHeaderDays = 'Days';
-            } else if (this.state.cur_duration_unit === 'Years') {
-                days *= 12;
-                m_time_tmp = 1 / 12;
-                Global.tableHeaderDays = 'Months';
-            }
-        } else { Global.tableHeaderDays = this.state.cur_duration_unit; }
-
-        Global.tableData = [[0, parseInt(this.state.cur_principle, 10), 0]];
+        Global.tableDataTwo = [[0, `$${parseInt(this.state.cur_principle, 10)}`, '$0']];
 
         let resultSGF = 0;
 
         for (let i = 1; i <= days; i += 1) {
             const RperNSGF = (this.state.potential_interest - this.state.potential_inflation) / this.state.m_potentialaddition;
-
             resultSGF = this.state.cur_principle * (1 + (this.state.potential_interest - this.state.potential_inflation) / this.state.m_potentialcompound) ** (this.state.m_potentialcompound * m_time_tmp * i);
-
-            const resultAdditionSGF = this.state.potential_addition * (((1 + RperNSGF) ** (this.state.m_potentialaddition * m_time_tmp * i) - 1) / (RperNSGF));// * (1 + (RperNSGF));
-
+            const resultAdditionSGF = this.state.potential_addition * (((1 + RperNSGF) ** (this.state.m_potentialaddition * m_time_tmp * i) - 1) / (RperNSGF));
             resultSGF += resultAdditionSGF;
-
             const deposite = this.state.potential_addition * this.state.m_potentialaddition * m_time_tmp * i;
-
             let interestTotal = resultSGF - this.state.cur_principle - deposite;
-
             interestTotal = interestTotal.toFixed(2);
-
-            Global.tableData.push([i, parseInt(resultSGF.toFixed(2), 10), interestTotal]);
+            Global.tableDataTwo.push([i, `$${parseInt(resultSGF.toFixed(2), 10)}`, `$${interestTotal}`]);
         }
-
-        if (Global.tableData.length > 1) this.props.navigation.navigate('Amortization');
     }
 
     render() {
         const compoundUnit = [
             { value: 'Daily' },
+            { value: 'Weekly' },
             { value: 'Monthly' },
             { value: 'Quarterly' },
-            { value: 'Semiannually' },
+            { value: 'Semi-Annually' },
             { value: 'Annually' },
         ];
 
@@ -384,42 +416,43 @@ class Calculator extends Component {
                             </Text>
                         </View>
 
-                        <View style = {styles.first}>
-                            <Text style = {{ marginLeft: 10, color: '#ffffff' }}>Principal</Text>
-                            <TextInput style = {styles.input1}
-                                underlineColorAndroid = "transparent"
-                                placeholder = "0"
-                                placeholderTextColor = "#ffffff"
-                                autoCapitalize = "none"
-                                keyboardType = 'numeric'
-                                onChangeText = {text => this.onChangeCurPrinciple(text)}
-                                value = { this.state.cur_principle}
+                        <View style={styles.first}>
+                            <Text style={{ marginLeft: 10, color: '#ffffff' }}>Principal</Text>
+                            <TextInput
+                                style={styles.input1}
+                                underlineColorAndroid="transparent"
+                                placeholder="$0"
+                                placeholderTextColor="#ffffff"
+                                autoCapitalize="none"
+                                keyboardType='numeric'
+                                onChangeText={text => this.onChangeCurPrinciple(text.split('$').pop())}
+                                value={`$${this.state.cur_principle}`}
                                 maxLength={11}
                             />
                         </View>
 
                         <View style={styles.second}>
-                            <Text style = {{ marginLeft: 10, color: '#ffffff' }}>Interest</Text>
-                            <TextInput style = {styles.input2}
-                                underlineColorAndroid = "transparent"
-                                placeholder = "0"
-                                placeholderTextColor = "#ffffff"
-                                autoCapitalize = "none"
-                                keyboardType = 'numeric'
-                                onChangeText = {text => this.onChangeCurInterest(text)}
-                                value={this.state.cur_interest}
+                            <Text style={{ marginLeft: 10, color: '#ffffff' }}>Interest</Text>
+                            <TextInput style={styles.input2}
+                                underlineColorAndroid="transparent"
+                                placeholder="%0"
+                                placeholderTextColor="#ffffff"
+                                autoCapitalize="none"
+                                keyboardType='numeric'
+                                onChangeText={text => this.onChangeCurInterest(text.split('%').pop())}
+                                value={`%${(this.state.cur_interest * 100).toFixed(0)}`}
                                 maxLength={11}
                             />
 
-                            <Text style = {{ color: '#ffffff' }}>Inflation</Text>
-                            <TextInput style = {styles.input2}
-                                underlineColorAndroid = "transparent"
-                                placeholder = "0"
-                                placeholderTextColor = "#ffffff"
-                                autoCapitalize = "none"
-                                keyboardType = 'numeric'
-                                onChangeText = {text => this.onChangeCurInflation(text)}
-                                value = { this.state.cur_inflation}
+                            <Text style={{ color: '#ffffff' }}>Inflation</Text>
+                            <TextInput style={styles.input2}
+                                underlineColorAndroid="transparent"
+                                placeholder="%0"
+                                placeholderTextColor="#ffffff"
+                                autoCapitalize="none"
+                                keyboardType='numeric'
+                                onChangeText={text => this.onChangeCurInflation(text.split('%').pop())}
+                                value={`%${(this.state.cur_inflation * 100).toFixed(0)}`}
                                 maxLength={11}
                             />
                         </View>
@@ -434,7 +467,7 @@ class Calculator extends Component {
                                     backgroundColor: '#101010',
                                     borderRadius: 5,
                                     width: 150,
-                                    height: 40,
+                                    height: 35,
                                     paddingLeft: 20,
                                 }}
                                 rippleCentered={true}
@@ -470,7 +503,7 @@ class Calculator extends Component {
                                     backgroundColor: '#101010',
                                     borderRadius: 5,
                                     width: 150,
-                                    height: 40,
+                                    height: 35,
                                     paddingLeft: 20,
                                 }}
                                 rippleCentered={true}
@@ -489,12 +522,12 @@ class Calculator extends Component {
                             <Text style = {{ marginLeft: 10, color: '#ffffff' }}>Addition</Text>
                             <TextInput style = {styles.input2}
                                 underlineColorAndroid = "transparent"
-                                placeholder = "0"
+                                placeholder = "$0"
                                 placeholderTextColor = "#ffffff"
                                 autoCapitalize = "none"
                                 keyboardType = 'numeric'
-                                onChangeText = {text => this.onChangeCurAddition(text)}
-                                value = { this.state.cur_addition}
+                                onChangeText = {text => this.onChangeCurAddition(text.split('$').pop())}
+                                value={`$${this.state.cur_addition}`}
                                 maxLength={11}
                             />
 
@@ -506,7 +539,7 @@ class Calculator extends Component {
                                     backgroundColor: '#101010',
                                     borderRadius: 5,
                                     width: 150,
-                                    height: 40,
+                                    height: 35,
                                     paddingLeft: 20,
                                 }}
                                 rippleCentered={true}
@@ -530,7 +563,7 @@ class Calculator extends Component {
                                 autoCapitalize = "none"
                                 editable={false}
                                 selectTextOnFocus={false}
-                                ref={component => this._curTotal = component}
+                                value={this.makeResult(this.state.curTotal)}
                             />
                         </View>
 
@@ -545,12 +578,12 @@ class Calculator extends Component {
                             <Text style = {{ marginLeft: 10, color: '#ffffff' }}>Principal</Text>
                             <TextInput style = {styles.input1}
                                 underlineColorAndroid = "transparent"
-                                placeholder = "0"
+                                placeholder = "$0"
                                 placeholderTextColor = "#ffffff"
                                 autoCapitalize = "none"
                                 editable={false}
                                 selectTextOnFocus={false}
-                                ref={component => this._potentialPrincipal = component}
+                                value={`$${this.state.potential_principle}`}
                             />
                         </View>
 
@@ -558,24 +591,24 @@ class Calculator extends Component {
                             <Text style = {{ marginLeft: 10, color: '#ffffff' }}>Interest</Text>
                             <TextInput style = {styles.input2}
                                 underlineColorAndroid = "transparent"
-                                placeholder = "0"
+                                placeholder = "%0"
                                 placeholderTextColor = "#ffffff"
                                 autoCapitalize = "none"
                                 keyboardType = 'numeric'
-                                onChangeText = {text => this.onChangePotentialInterest(text)}
-                                value = { this.state.potential_interest}
+                                onChangeText = {text => this.onChangePotentialInterest(text.split('%').pop())}
+                                value = {`%${(this.state.potential_interest * 100).toFixed(0)}`}
                                 maxLength={11}
                             />
 
                             <Text style = {{ marginLeft: 10, color: '#ffffff' }}>Inflation</Text>
                             <TextInput style = {styles.input2}
                                 underlineColorAndroid = "transparent"
-                                placeholder = "0"
+                                placeholder = "%0"
                                 placeholderTextColor = "#ffffff"
                                 autoCapitalize = "none"
                                 keyboardType = 'numeric'
-                                onChangeText = {text => this.onChangePotentialInflation(text)}
-                                value = { this.state.potential_inflation}
+                                onChangeText = {text => this.onChangePotentialInflation(text.split('%').pop())}
+                                value = {`%${(this.state.potential_inflation * 100).toFixed(0)}`}
                                 maxLength={11}
                             />
                         </View>
@@ -590,7 +623,7 @@ class Calculator extends Component {
                                     backgroundColor: '#101010',
                                     borderRadius: 5,
                                     width: 150,
-                                    height: 40,
+                                    height: 35,
                                     paddingLeft: 20,
                                 }}
                                 rippleCentered={true}
@@ -626,12 +659,12 @@ class Calculator extends Component {
                             <Text style={{ marginLeft: 10, color: '#ffffff' }}>Addition</Text>
                             <TextInput style={styles.input2}
                                 underlineColorAndroid="transparent"
-                                placeholder="0"
+                                placeholder="$0"
                                 placeholderTextColor="#ffffff"
                                 autoCapitalize="none"
                                 keyboardType='numeric'
-                                onChangeText={text => this.onChangePotentialAddition(text)}
-                                value={this.state.cur_addition}
+                                onChangeText={text => this.onChangePotentialAddition(text.split('$').pop())}
+                                value={`$${this.state.cur_addition}`}
                                 maxLength={11}
                             />
 
@@ -643,7 +676,7 @@ class Calculator extends Component {
                                     backgroundColor: '#101010',
                                     borderRadius: 5,
                                     width: 150,
-                                    height: 40,
+                                    height: 35,
                                     paddingLeft: 20,
                                 }}
                                 rippleCentered={true}
@@ -658,7 +691,7 @@ class Calculator extends Component {
                             />
                         </View>
 
-                        <View style={[styles.second, { paddingRight: 15 }]}>
+                        <View style={styles.second}>
                             <Text style = {{ marginLeft: 10, color: '#ffffff' }}>Total Return</Text>
                             <TextInput style = {styles.input1}
                                 underlineColorAndroid = "transparent"
@@ -667,16 +700,16 @@ class Calculator extends Component {
                                 autoCapitalize = "none"
                                 editable={false}
                                 selectTextOnFocus={false}
-                                ref={component => this._potentialTotal = component}
+                                value={this.makeResult(this.state.potentialTotal)}
                             />
                         </View>
 
-                        <TouchableOpacity style = {styles.btn_graph} onPress = {() => this.onGraph('Graph')}>
-                            <Image source={require('../../assets/images/btn_Graph.png')}/>
+                        <TouchableOpacity style={styles.btn_graph} onPress = {() => this.onGraph('Graph')}>
+                            <Image style={styles.btn_graph_inner} source={require('../../assets/images/btn_Graph.png')}/>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style = {styles.btn_graph} onPress = {() => this.onAmortization()}>
-                            <Image source={require('../../assets/images/btn_Table.png')}/>
+                        <TouchableOpacity style={styles.btn_graph} onPress = {() => this.onTable()}>
+                            <Image style={styles.btn_graph_inner} source={require('../../assets/images/btn_Table.png')}/>
                         </TouchableOpacity>
                     </Content>
 

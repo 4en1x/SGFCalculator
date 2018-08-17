@@ -7,9 +7,8 @@ export default StyleSheet.create({
 
     button1: {
         borderRadius: 20,
-        marginTop: 0,
+        marginTop: Dimensions.get('screen').height / 2 - 120,
         shadowColor: '#303838',
-
         alignItems: 'center',
         shadowOffset: { width: 0, height: 5 },
         shadowRadius: 10,
@@ -22,23 +21,12 @@ export default StyleSheet.create({
         shadowColor: '#303838',
         alignItems: 'center',
         shadowOffset: { width: 0, height: 5 },
-
         shadowRadius: 10,
         shadowOpacity: 0.35,
     },
 
-    aboutBackground: {
-        borderRadius: 10,
-        marginTop: Dimensions.get('screen').height / 2 - 120,
-        height: 140,
-        backgroundColor: '#63656e',
-    },
-
-    aboutText: {
-        marginLeft: 10,
-        marginTop: 5,
-        marginBottom: 5,
-        fontWeight: '400',
-        color: '#ffffff',
+    bottomButton: {
+        borderRadius: 20,
+        backgroundColor: '#1b4567',
     },
 });

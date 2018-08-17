@@ -27,8 +27,8 @@ export default class CustomFooter extends Component {
     }
 
     onTable() {
-        if (Global.tableData.length > 1) {
-            this.props.navigation.navigate('Amortization');
+        if (Global.tableDataOne.length > 1 || Global.tableDataTwo.length > 1) {
+            this.props.navigation.navigate('Table');
         }
     }
 

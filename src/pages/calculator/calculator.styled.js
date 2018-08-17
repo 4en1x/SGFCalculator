@@ -50,14 +50,16 @@ export default StyleSheet.create({
     },
 
     btn_graph: {
-        borderRadius: 20,
-        marginTop: 20,
-        shadowColor: '#303838',
+        flex: 1,
+        justifyContent: 'center',
         alignItems: 'center',
-        shadowOffset: { width: 0, height: 5 },
+        marginTop: 20,
+        borderRadius: 20,
+    },
 
-        shadowRadius: 10,
-        shadowOpacity: 0.35,
+    btn_graph_inner: {
+        width: '90%',
+        resizeMode: 'contain',
     },
 
     bottomButton: {

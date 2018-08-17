@@ -6,7 +6,9 @@ import {
     Content, Text,
 } from 'native-base';
 
-import {Image, ImageBackground, TouchableOpacity, View} from 'react-native';
+import {
+    Image, ImageBackground, TouchableOpacity, View,
+} from 'react-native';
 import CustomFooter from '../../components/footer/footer.component';
 
 import styles from './home.styled';

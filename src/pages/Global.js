@@ -4,7 +4,9 @@ export default {
     princial_data: [],
     sY: [],
     maxY: 0,
-    tableData: [],
+    tableDataOne: [],
+    tableDataTwo: [],
     xAxis_label: 'Investment During',
-    tableHeaderDays: 'Years',
+    tableHeaderOneDays: 'Years',
+    tableHeaderTwoDays: 'Years',
 };
