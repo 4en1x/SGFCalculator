@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {Container, Content, Text} from 'native-base';
+import { Container, Content, Text } from 'native-base';
 import { View, Dimensions, ScrollView } from 'react-native';
 import { Table, Row } from 'react-native-table-component';
+import PropTypes from 'prop-types';
 import CustomFooter from '../../components/footer/footer.component';
 
 import styles from './table.styled';
@@ -12,9 +13,13 @@ class CustomTable extends Component {
         super(props);
 
         this.state = {
-            tableHeadOne: ['Date(days)', 'Result', 'Interest'],
-            tableHeadTwo: ['Date(days)', 'Result', 'Interest'],
-            widthArr: [50, 200, 100],
+            tableHeadOne: [Global.tableHeaderOneDays, 'Result', 'Interest'],
+            tableHeadTwo: [Global.tableHeaderTwoDays, 'Interest'],
+            widthArr: [
+                Dimensions.get('screen').width / 7,
+                Dimensions.get('screen').width / 2,
+                Dimensions.get('screen').width / 3,
+            ],
         };
     }
 
@@ -32,22 +37,19 @@ class CustomTable extends Component {
         },
     };
 
+    static get propTypes() {
+        return {
+            navigation: PropTypes.shape({
+                navigate: PropTypes.func,
+            }),
+        };
+    }
+
     onGraph() {
         if (Global.maxY > 1) this.props.navigation.navigate('Graph');
     }
 
     render() {
-        const { navigate } = this.props.navigation;
-
-        this.state.tableHeadOne[0] = Global.tableHeaderOneDays;
-        this.state.tableHeadTwo[0] = Global.tableHeaderTwoDays;
-
-        this.state.widthArr[0] = Dimensions.get('screen').width / 7;
-        this.state.widthArr[1] = Dimensions.get('screen').width / 2;
-        this.state.widthArr[2] = Dimensions.get('screen').width / 3;
-
-        const state = this.state;
-
         return (
             <Container>
                 <Content>
@@ -60,8 +62,8 @@ class CustomTable extends Component {
                             </View>
                             <Table borderStyle={{ borderColor: '#000000' }}>
                                 <Row
-                                    data={state.tableHeadOne}
-                                    widthArr={state.widthArr}
+                                    data={this.state.tableHeadOne}
+                                    widthArr={this.state.widthArr}
                                     style={styles.header}
                                     textStyle={styles.headertext}
                                 />
@@ -72,7 +74,7 @@ class CustomTable extends Component {
                                         <Row
                                             key={index}
                                             data={rowData}
-                                            widthArr={state.widthArr}
+                                            widthArr={this.state.widthArr}
                                             style={[styles.row, index % 2 && { backgroundColor: '#63656e' }]}
                                             textStyle={styles.text}
                                         />
@@ -86,8 +88,8 @@ class CustomTable extends Component {
                             </View>
                             <Table borderStyle={{ borderColor: '#000000' }}>
                                 <Row
-                                    data={state.tableHeadTwo}
-                                    widthArr={state.widthArr}
+                                    data={this.state.tableHeadTwo}
+                                    widthArr={this.state.widthArr}
                                     style={styles.header}
                                     textStyle={styles.headertext}
                                 />
@@ -98,7 +100,7 @@ class CustomTable extends Component {
                                         <Row
                                             key={index}
                                             data={rowData}
-                                            widthArr={state.widthArr}
+                                            widthArr={this.state.widthArr}
                                             style={[styles.row, index % 2 && { backgroundColor: '#63656e' }]}
                                             textStyle={styles.text}
                                         />

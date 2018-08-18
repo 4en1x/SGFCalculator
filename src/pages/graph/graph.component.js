@@ -1,36 +1,29 @@
 import React, { Component } from 'react';
 import { Container, Content } from 'native-base';
-import { Dimensions, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 
 import {
     VictoryChart, VictoryGroup, VictoryAxis, VictoryLine, VictoryTheme, VictoryLabel,
 } from 'victory-native';
 
+import PropTypes from 'prop-types';
 import CustomFooter from '../../components/footer/footer.component';
 
-import styles from './graph.styled';
 import Global from '../Global';
 
 
 class Graph extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            flag_param: 0,
-        };
-    }
-
-    gotoscreen(name) {
-        const { navigate } = this.props.navigation;
-        // Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT);
-        navigate(name);
-    }
-
-
     static navigationOptions = {
         title: 'Graph',
     };
 
+    static get propTypes() {
+        return {
+            navigation: PropTypes.shape({
+                navigate: PropTypes.func,
+            }),
+        };
+    }
 
     render() {
         const m_length = Global.current_data.length;
@@ -41,10 +34,6 @@ class Graph extends Component {
         else if (Global.maxY > 1000) m_fontSize = 10;
         else if (Global.maxY > 10000) m_fontSize = 8;
         else if (Global.maxY > 100000) m_fontSize = 5;
-
-        // Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.LANDSCAPE);
-        const { width } = Dimensions.get('window').width - Dimensions.get('window').width / 10;
-        const { hight } = Dimensions.get('window').height - Dimensions.get('window').height / 3;
 
         return (
             <Container>
@@ -67,14 +56,14 @@ class Graph extends Component {
                             />
 
                             <VictoryAxis dependentAxis
-                                         orientation="right"
-                                         label="Return(AUD)"
-                                         width={400} height={400}
-                                         style={{
-                                             axisLabel: { padding: 5, stroke: '#ccc' },
-                                             ticks: { stroke: '#ccc' },
-                                             tickLabels: { fontSize: m_fontSize, fill: '#E0F2F1', fontWeight: 'bold' },
-                                         }}
+                                orientation="right"
+                                label="Return(AUD)"
+                                width={400} height={400}
+                                style={{
+                                    axisLabel: { padding: 5, stroke: '#ccc' },
+                                    ticks: { stroke: '#ccc' },
+                                    tickLabels: { fontSize: m_fontSize, fill: '#E0F2F1', fontWeight: 'bold' },
+                                }}
                             />
 
                             <VictoryGroup domain={{ y: [0, Global.maxY] }} >
