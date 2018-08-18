@@ -78,12 +78,12 @@ class AboutUs extends Component {
                             <Image source={require('../../assets/images/contactDetail.png')}/>
                         </View>
 
-                        <TouchableOpacity style={styles.aboutContacts} onPress={() => this.openMail()}>
-                            <Image style={styles.aboutContactsInner} source={require('../../assets/images/admin.png')}/>
-                        </TouchableOpacity>
-
                         <TouchableOpacity style={styles.aboutContacts} onPress={() => this.openSite()}>
                             <Image style={styles.aboutContactsInner} source={require('../../assets/images/email.png')}/>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={styles.aboutContacts} onPress={() => this.openMail()}>
+                            <Image style={styles.aboutContactsInner} source={require('../../assets/images/admin.png')}/>
                         </TouchableOpacity>
 
                         <TouchableOpacity style={styles.aboutContacts} onPress={() => this.openPhoneNumber()}>

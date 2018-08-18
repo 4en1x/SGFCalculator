@@ -7,30 +7,22 @@ export default StyleSheet.create({
 
     button1: {
         borderRadius: 20,
-        marginTop: 0,
-        shadowColor: '#303838',
-
+        marginTop: -10,
         alignItems: 'center',
-        shadowOffset: { width: 0, height: 5 },
-        shadowRadius: 10,
-        shadowOpacity: 0.35,
     },
 
     button2: {
         borderRadius: 20,
         marginTop: 40,
-        shadowColor: '#303838',
         alignItems: 'center',
-        shadowOffset: { width: 0, height: 5 },
-
-        shadowRadius: 10,
-        shadowOpacity: 0.35,
+        flex: 1,
+        justifyContent: 'center',
     },
 
     aboutBackground: {
         borderRadius: 10,
         marginTop: Dimensions.get('screen').height / 2 - 120,
-        height: 140,
+        height: 120,
         backgroundColor: '#63656e',
     },
 
@@ -40,5 +32,10 @@ export default StyleSheet.create({
         marginBottom: 5,
         fontWeight: '400',
         color: '#ffffff',
+    },
+
+    aboutContactsInner: {
+        width: '102%',
+        resizeMode: 'contain',
     },
 });

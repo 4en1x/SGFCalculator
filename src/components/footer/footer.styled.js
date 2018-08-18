@@ -13,8 +13,11 @@ export default StyleSheet.create({
     },
 
     textContainer: {
+        marginLeft: -10,
+        marginRight: -10,
+        margin: 0,
         color: '#ffffff',
         alignItems: 'center',
-        fontSize: 12,
+        fontSize: 13,
     },
 });

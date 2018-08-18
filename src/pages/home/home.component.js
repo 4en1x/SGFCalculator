@@ -51,7 +51,7 @@ class Home extends Component {
                                 style={styles.button1}
                                 onPress={() => navigate('Calculator')}
                             >
-                                <Image source={require('../../assets/images/btn_Return.png')} />
+                                <Image style={styles.aboutContactsInner} source={require('../../assets/images/btn_Return.png')} />
                             </TouchableOpacity>
 
                             <Text style={styles.aboutText}>
@@ -63,7 +63,7 @@ class Home extends Component {
                             style={styles.button2}
                             onPress={() => navigate('AboutUs')}
                         >
-                            <Image source={require('../../assets/images/btn_AboutUs.png')} />
+                            <Image style={styles.aboutContactsInner} source={require('../../assets/images/btn_AboutUs.png')} />
                         </TouchableOpacity>
                     </Content>
 

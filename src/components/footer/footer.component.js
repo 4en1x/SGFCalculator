@@ -3,10 +3,9 @@ import {
     Footer,
     Button,
     FooterTab,
-    Icon,
     Text,
 } from 'native-base';
-
+import { Image } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './footer.styled';
 import Global from '../../pages/Global';
@@ -43,7 +42,7 @@ export default class CustomFooter extends Component {
                         transparent
                         onPress={() => navigate('Calculator')}
                     >
-                        <Icon style={{ color: '#ffffff' }} type="FontAwesome" name="calculator"/>
+                        <Image source={require('../../assets/images/calculator-footer.png')}/>
                         <Text style={styles.textContainer}>Calculator</Text>
                     </Button>
 
@@ -52,7 +51,7 @@ export default class CustomFooter extends Component {
                         transparent
                         onPress={() => this.onTable()}
                     >
-                        <Icon style={{ color: '#ffffff' }} type="FontAwesome" name="file-text"/>
+                        <Image source={require('../../assets/images/table-footer.png')}/>
                         <Text style={styles.textContainer}>Table</Text>
                     </Button>
 
@@ -61,7 +60,7 @@ export default class CustomFooter extends Component {
                         transparent
                         onPress={() => this.onGraph()}
                     >
-                        <Icon style={{ color: '#ffffff' }} type="FontAwesome" name="bar-chart"/>
+                        <Image source={require('../../assets/images/graph-footer.png')}/>
                         <Text style={styles.textContainer}>Graph</Text>
                     </Button>
 
@@ -70,7 +69,7 @@ export default class CustomFooter extends Component {
                         transparent
                         onPress={() => navigate('AboutUs')}
                     >
-                        <Icon style={{ color: '#ffffff' }} type="FontAwesome" name="user"/>
+                        <Image source={require('../../assets/images/about-footer.png')}/>
                         <Text style={styles.textContainer}>About us</Text>
                     </Button>
                 </FooterTab>
