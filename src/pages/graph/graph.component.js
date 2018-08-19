@@ -1,21 +1,41 @@
 import React, { Component } from 'react';
-import { Container, Content } from 'native-base';
-import { ScrollView } from 'react-native';
+import { Container, Content, Text } from 'native-base';
+import { ScrollView, TouchableOpacity, View } from 'react-native';
 
 import {
     VictoryChart, VictoryGroup, VictoryAxis, VictoryLine, VictoryTheme, VictoryLabel,
 } from 'victory-native';
 
 import PropTypes from 'prop-types';
+import { HeaderBackButton } from 'react-navigation';
 import CustomFooter from '../../components/footer/footer.component';
 
+import styles from './graph.styled';
 import Global from '../Global';
 
 
 class Graph extends Component {
-    static navigationOptions = {
+    static navigationOptions = ({ navigation }) => ({
         title: 'Graph',
-    };
+        headerTintColor: '#ffffff',
+        headerStyle: {
+            backgroundColor: '#1b4567',
+        },
+        headerTitleStyle: {
+            fontSize: 20,
+        },
+        headerLeft: (
+            <View style={styles.headerLeft}>
+                <HeaderBackButton
+                    onPress={() => navigation.navigate('Calculator')}
+                    tintColor='#ffffff'
+                />
+                <TouchableOpacity style= {styles.customBackTitle} onPress={() => navigation.navigate('Calculator')} >
+                    <Text style={styles.customBackTitleText}>Calculator</Text>
+                </TouchableOpacity>
+            </View>
+        ),
+    });
 
     static get propTypes() {
         return {

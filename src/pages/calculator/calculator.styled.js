@@ -53,14 +53,13 @@ export default StyleSheet.create({
         borderWidth: 1,
         borderColor: 'lightgrey',
         backgroundColor: '#101010',
-        borderRadius: 5,
         width: 150,
-        height: 33,
+        height: 30,
         paddingLeft: 20,
     },
 
     dropdownInputContainer: {
-        marginTop: -28,
+        marginTop: -31,
         borderBottomColor: 'transparent',
     },
 
@@ -93,5 +92,20 @@ export default StyleSheet.create({
     list_close: {
         marginBottom: 24,
         zIndex: -1,
+    },
+
+    headerLeft: {
+        flex: 1,
+        flexDirection: 'row',
+    },
+
+    customBackTitle: {
+        marginTop: 12,
+        marginLeft: -16,
+    },
+
+    customBackTitleText: {
+        color: '#ffffff',
+        fontSize: 17,
     },
 });

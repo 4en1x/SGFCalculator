@@ -33,4 +33,19 @@ export default StyleSheet.create({
         height: 40,
         backgroundColor: '#3f434e',
     },
+
+    headerLeft: {
+        flex: 1,
+        flexDirection: 'row',
+    },
+
+    customBackTitle: {
+        marginTop: 12,
+        marginLeft: -16,
+    },
+
+    customBackTitleText: {
+        color: '#ffffff',
+        fontSize: 17,
+    },
 });

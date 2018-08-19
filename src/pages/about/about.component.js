@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { HeaderBackButton } from 'react-navigation';
 import {
     Container,
     Text,
@@ -6,7 +7,7 @@ import {
 } from 'native-base';
 
 import {
-    Linking, Platform, Image, View, ImageBackground, TouchableOpacity,
+    Linking, Platform, Image, View, ImageBackground, TouchableOpacity, Button,
 } from 'react-native';
 
 import PropTypes from 'prop-types';
@@ -22,19 +23,27 @@ class AboutUs extends Component {
         };
     }
 
-    static navigationOptions = {
+    static navigationOptions = ({ navigation }) => ({
         title: 'About Us',
         headerTintColor: '#ffffff',
-
         headerStyle: {
             backgroundColor: '#1b4567',
-            borderBottomColor: '#888888',
-            borderBottomWidth: 1,
         },
         headerTitleStyle: {
             fontSize: 20,
         },
-    };
+        headerLeft: (
+            <View style={styles.headerLeft}>
+                <HeaderBackButton
+                    onPress={() => navigation.navigate('Home')}
+                    tintColor='#ffffff'
+                />
+                <TouchableOpacity style= {styles.customBackTitle} onPress={() => navigation.navigate('Home')} >
+                    <Text style={styles.customBackTitleText}>Home</Text>
+                </TouchableOpacity>
+            </View>
+        ),
+    });
 
     openMaps() {
         const scheme = Platform.select({ ios: 'maps:0,0?q=', android: 'geo:0,0?q=' });

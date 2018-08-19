@@ -28,8 +28,6 @@ class Home extends Component {
 
         headerStyle: {
             backgroundColor: '#1b4567',
-            borderBottomColor: '#888888',
-            borderBottomWidth: 1,
         },
         headerTitleStyle: {
             fontSize: 20,

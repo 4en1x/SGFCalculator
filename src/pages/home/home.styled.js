@@ -20,7 +20,6 @@ export default StyleSheet.create({
     },
 
     aboutBackground: {
-        borderRadius: 10,
         marginTop: Dimensions.get('screen').height / 2 - 120,
         height: 120,
         backgroundColor: '#63656e',
@@ -30,6 +29,7 @@ export default StyleSheet.create({
         marginLeft: 10,
         marginTop: 5,
         marginBottom: 5,
+        textAlign: 'center',
         fontWeight: '400',
         color: '#ffffff',
     },

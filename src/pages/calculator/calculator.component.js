@@ -10,6 +10,7 @@ import {
 
 import { Dropdown } from 'react-native-material-dropdown';
 import PropTypes from 'prop-types';
+import { HeaderBackButton } from 'react-navigation';
 import styles from './calculator.styled';
 import Global from '../Global';
 import CustomFooter from '../../components/footer/footer.component';
@@ -27,6 +28,11 @@ class Calculator extends Component {
             cur_total: null,
             cur_inflation: 0,
             cur_duration: null,
+
+            cur_interest_is_focus: false,
+            cur_inflation_is_focus: false,
+            potential_interest_is_focus: false,
+            potential_inflation_is_focus: false,
 
             cur_compound_unit: 'Annually',
             cur_duration_unit: 'Years',
@@ -54,19 +60,27 @@ class Calculator extends Component {
         };
     }
 
-    static navigationOptions = {
+    static navigationOptions = ({ navigation }) => ({
         title: 'Calculator',
         headerTintColor: '#ffffff',
-
         headerStyle: {
             backgroundColor: '#1b4567',
-            borderBottomColor: '#888888',
-            borderBottomWidth: 1,
         },
         headerTitleStyle: {
             fontSize: 20,
         },
-    };
+        headerLeft: (
+            <View style={styles.headerLeft}>
+                <HeaderBackButton
+                    onPress={() => navigation.navigate('Home')}
+                    tintColor='#ffffff'
+                />
+                <TouchableOpacity style= {styles.customBackTitle} onPress={() => navigation.navigate('Home')} >
+                    <Text style={styles.customBackTitleText}>Home</Text>
+                </TouchableOpacity>
+            </View>
+        ),
+    });
 
     static get propTypes() {
         return {
@@ -347,9 +361,9 @@ class Calculator extends Component {
     }
 
     fillTableOne() {
-        let days = this.state.cur_duration;
+        const days = this.state.cur_duration;
 
-        let m_time_tmp = this.state.m_time;
+        const m_time_tmp = this.state.m_time;
         Global.tableHeaderOneDays = this.state.cur_duration_unit;
 
         Global.tableDataOne = [[0, `$${parseInt(this.state.cur_principle, 10)}`, '$0']];
@@ -369,9 +383,9 @@ class Calculator extends Component {
     }
 
     fillTableTwo() {
-        let days = this.state.potential_duration;
+        const days = this.state.potential_duration;
 
-        let m_time_tmp = this.state.m_time;
+        const m_time_tmp = this.state.m_time;
         Global.tableHeaderTwoDays = this.state.cur_duration_unit;
 
         Global.tableDataTwo = [[0, `$${parseInt(this.state.cur_principle, 10)}`, '$0']];
@@ -433,26 +447,36 @@ class Calculator extends Component {
 
                         <View style={styles.second}>
                             <Text style={{ marginLeft: 10, color: '#ffffff' }}>Interest</Text>
-                            <TextInput style={styles.input2}
+                            <TextInput style={[styles.input2, { marginLeft: 22 }]}
                                 underlineColorAndroid="transparent"
-                                placeholder="%0"
                                 placeholderTextColor="#ffffff"
                                 autoCapitalize="none"
                                 keyboardType='numeric'
-                                onChangeText={text => this.onChangeCurInterest(text.split('%').pop())}
-                                value={`%${(this.state.cur_interest * 100).toFixed(0)}`}
+                                onEndEditing={ () => this.setState({ cur_interest_is_focus: false })}
+                                onFocus={ () => this.setState({ cur_interest_is_focus: true })}
+                                onChangeText={text => this.onChangeCurInterest(text)}
+                                value={
+                                    this.state.cur_interest_is_focus
+                                        ? (this.state.cur_interest * 100).toFixed(0)
+                                        : `${(this.state.cur_interest * 100).toFixed(0)}%`
+                                }
                                 maxLength={11}
                             />
 
                             <Text style={{ color: '#ffffff' }}>Inflation</Text>
                             <TextInput style={styles.input2}
                                 underlineColorAndroid="transparent"
-                                placeholder="%0"
                                 placeholderTextColor="#ffffff"
                                 autoCapitalize="none"
                                 keyboardType='numeric'
-                                onChangeText={text => this.onChangeCurInflation(text.split('%').pop())}
-                                value={`%${(this.state.cur_inflation * 100).toFixed(0)}`}
+                                onEndEditing={ () => this.setState({ cur_inflation_is_focus: false })}
+                                onFocus={ () => this.setState({ cur_inflation_is_focus: true })}
+                                onChangeText={text => this.onChangeCurInflation(text)}
+                                value={
+                                    this.state.cur_inflation_is_focus
+                                        ? (this.state.cur_inflation * 100).toFixed(0)
+                                        : `${(this.state.cur_inflation * 100).toFixed(0)}%`
+                                }
                                 maxLength={11}
                             />
                         </View>
@@ -565,26 +589,36 @@ class Calculator extends Component {
 
                         <View style = {styles.second}>
                             <Text style = {{ marginLeft: 10, color: '#ffffff' }}>Interest</Text>
-                            <TextInput style = {styles.input2}
+                            <TextInput style={[styles.input2, { marginLeft: 22 }]}
                                 underlineColorAndroid = "transparent"
-                                placeholder = "%0"
                                 placeholderTextColor = "#ffffff"
                                 autoCapitalize = "none"
                                 keyboardType = 'numeric'
-                                onChangeText = {text => this.onChangePotentialInterest(text.split('%').pop())}
-                                value = {`%${(this.state.potential_interest * 100).toFixed(0)}`}
+                                onEndEditing={ () => this.setState({ potential_interest_is_focus: false })}
+                                onFocus={ () => this.setState({ potential_interest_is_focus: true })}
+                                onChangeText={text => this.onChangePotentialInterest(text)}
+                                value={
+                                    this.state.potential_interest_is_focus
+                                        ? (this.state.potential_interest * 100).toFixed(0)
+                                        : `${(this.state.potential_interest * 100).toFixed(0)}%`
+                                }
                                 maxLength={11}
                             />
 
                             <Text style = {{ marginLeft: 10, color: '#ffffff' }}>Inflation</Text>
                             <TextInput style = {styles.input2}
                                 underlineColorAndroid = "transparent"
-                                placeholder = "%0"
                                 placeholderTextColor = "#ffffff"
                                 autoCapitalize = "none"
                                 keyboardType = 'numeric'
-                                onChangeText = {text => this.onChangePotentialInflation(text.split('%').pop())}
-                                value = {`%${(this.state.potential_inflation * 100).toFixed(0)}`}
+                                onEndEditing={ () => this.setState({ potential_inflation_is_focus: false })}
+                                onFocus={ () => this.setState({ potential_inflation_is_focus: true })}
+                                onChangeText={text => this.onChangePotentialInflation(text)}
+                                value={
+                                    this.state.potential_inflation_is_focus
+                                        ? (this.state.potential_inflation * 100).toFixed(0)
+                                        : `${(this.state.potential_inflation * 100).toFixed(0)}%`
+                                }
                                 maxLength={11}
                             />
                         </View>
@@ -618,7 +652,7 @@ class Calculator extends Component {
                                 ref={component => this._potentialDuration = component}
                             />
 
-                            <Text style = {{ marginLeft: 10, color: '#ffffff' }}>
+                            <Text style = {{ marginLeft: 10, marginRight: 100, color: '#ffffff' }}>
                                 {this.state.potential_duration_unit}
                             </Text>
                         </View>

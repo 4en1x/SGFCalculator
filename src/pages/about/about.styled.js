@@ -8,9 +8,25 @@ export default StyleSheet.create({
     aboutBackground: {
         flex: 1,
         flexDirection: 'column',
+        paddingTop: 10,
         marginTop: 0,
-        height: 200,
+        height: 220,
         backgroundColor: '#63656e',
+    },
+
+    headerLeft: {
+        flex: 1,
+        flexDirection: 'row',
+    },
+
+    customBackTitle: {
+        marginTop: 12,
+        marginLeft: -16,
+    },
+
+    customBackTitleText: {
+        color: '#ffffff',
+        fontSize: 17,
     },
 
     aboutText: {
