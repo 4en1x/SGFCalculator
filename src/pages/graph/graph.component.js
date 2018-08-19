@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
-import { Container, Content, Text } from 'native-base';
-import { ScrollView, TouchableOpacity, View } from 'react-native';
+import {
+    Dimensions,
+    ImageBackground,
+    Text,
+    TouchableOpacity,
+    View,
+} from 'react-native';
 
 import {
     VictoryChart, VictoryGroup, VictoryAxis, VictoryLine, VictoryTheme, VictoryLabel,
 } from 'victory-native';
 
+import Orientation from 'react-native-orientation';
 import PropTypes from 'prop-types';
 import { HeaderBackButton } from 'react-navigation';
 import CustomFooter from '../../components/footer/footer.component';
@@ -27,10 +33,16 @@ class Graph extends Component {
         headerLeft: (
             <View style={styles.headerLeft}>
                 <HeaderBackButton
-                    onPress={() => navigation.navigate('Calculator')}
+                    onPress={() => {
+                        Orientation.lockToPortrait();
+                        navigation.navigate('Calculator');
+                    }}
                     tintColor='#ffffff'
                 />
-                <TouchableOpacity style= {styles.customBackTitle} onPress={() => navigation.navigate('Calculator')} >
+                <TouchableOpacity style= {styles.customBackTitle} onPress={() => {
+                    navigation.navigate('Calculator');
+                    Orientation.lockToPortrait();
+                }} >
                     <Text style={styles.customBackTitleText}>Calculator</Text>
                 </TouchableOpacity>
             </View>
@@ -45,6 +57,10 @@ class Graph extends Component {
         };
     }
 
+    componentDidMount() {
+        Orientation.lockToLandscape();
+    }
+
     render() {
         const m_length = Global.current_data.length;
 
@@ -56,58 +72,76 @@ class Graph extends Component {
         else if (Global.maxY > 100000) m_fontSize = 5;
 
         return (
-            <Container>
-                <Content>
-                    <ScrollView
-                        style={{ backgroundColor: '#7000FF' }}>
-                        <VictoryChart
-                            color={'#000000'}
-                            height={250}
-                            width={600}
-                            theme={VictoryTheme.material}
-                        >
-                            <VictoryAxis
-                                label= {Global.xAxis_label}
-                                style={{
-                                    axisLabel: { padding: 35, stroke: '#ccc' },
-                                    ticks: { stroke: '#ccc' },
-                                    tickLabels: { fontSize: 14, fill: '#E0F2F1', fontWeight: 'bold' },
-                                }}
+            <ImageBackground
+                source={require('../../assets/images/background-graph.png')}
+                style={{ flex: 1 }}
+            >
+                <View style={{ flex: 1 }}>
+                    <VictoryChart
+                        padding={{
+                            top: 25, bottom: 60, left: 50, right: 80,
+                        }}
+                        color={'#000000'}
+                        height={Dimensions.get('screen').width - 110}
+                        width={Dimensions.get('screen').height - 50}
+                        theme={VictoryTheme.material}
+                    >
+                        <VictoryAxis
+                            label= {Global.xAxis_label}
+                            style={{
+                                axisLabel: { fontSize: 16, padding: 35, stroke: '#ffffff' },
+                                ticks: { stroke: '#ffffff' },
+                                tickLabels: { fontSize: 14, fill: '#ffffff', fontWeight: 'bold' },
+                            }}
+                        />
+
+                        <VictoryAxis dependentAxis
+                            orientation="right"
+                            label="Return $"
+                            style={{
+                                axisLabel: { padding: 60, fontSize: 16, stroke: '#ffffff' },
+                                ticks: { stroke: '#ffffff' },
+                                tickLabels: { fontSize: m_fontSize, fill: '#ffffff', fontWeight: 'bold' },
+                            }}
+                        />
+
+                        <VictoryGroup domain={{ y: [0, Global.maxY * 1.2] }} >
+                            <VictoryLine
+                                data={[{ x: 0, y: 0 }, { x: 0, y: Global.maxY * 1.2 }]}
+                                style={{ data: { stroke: '#FFFFFF' } }}
+                            />
+                            <VictoryLine
+                                data={[{ x: 0, y: Global.maxY * 1.2 }, { x: parseInt(Global.current_data[(m_length - 1)].x), y: Global.maxY * 1.2 }]}
+                                style={{ data: { stroke: '#FFFFFF' } }}
                             />
 
-                            <VictoryAxis dependentAxis
-                                orientation="right"
-                                label="Return(AUD)"
-                                width={400} height={400}
-                                style={{
-                                    axisLabel: { padding: 5, stroke: '#ccc' },
-                                    ticks: { stroke: '#ccc' },
-                                    tickLabels: { fontSize: m_fontSize, fill: '#E0F2F1', fontWeight: 'bold' },
-                                }}
+                            <VictoryLine
+                                data={Global.sgf_data}
+                                interpolation="natural"
+                                style={{ data: { stroke: '#00F300' } }}
+                            />
+                            <VictoryLine
+                                data={Global.current_data}
+                                interpolation="natural"
+                                style={{ data: { stroke: '#FF0000' } }}
                             />
 
-                            <VictoryGroup domain={{ y: [0, Global.maxY] }} >
-                                <VictoryLine data={[{ x: 0, y: 0 }, { x: 0, y: Global.maxY }]} style={{ data: { stroke: '#FFFFFF' } }}/>
-                                <VictoryLine data={[{ x: 0, y: Global.maxY }, { x: parseInt(Global.current_data[(m_length - 1)].x), y: Global.maxY }]} style={{ data: { stroke: '#FFFFFF' } }}/>
-
-                                <VictoryLine data={Global.sgf_data} interpolation="natural" style={{ data: { stroke: '#00F300' } }}/>
-                                <VictoryLine data={Global.current_data} interpolation="natural" style={{ data: { stroke: '#FF0000' } }}/>
-                                <VictoryLine data={Global.princial_data} interpolation="natural" style={{ data: { stroke: '#FFFFFF' } }}/>
-
-                                <VictoryLabel text="P" datum={{ x: 1 - 0.1, y: Global.princial_data[0].y }} textAnchor="end" style={{ stroke: '#FFFFFF' }}/>
-
-                                <VictoryLabel text="Current" datum={{ x: Global.current_data[3].x, y: Global.current_data[3].y + Global.maxY * 0.08 }} textAnchor="start" style={{ stroke: '#ff0000' }}/>
-                                <VictoryLabel text="SGF" datum={{ x: Global.sgf_data[4].x, y: Global.sgf_data[4].y + Global.maxY * 0.08 }} textAnchor="start" style={{ stroke: '#00ffff' }}/>
-                                <VictoryLabel text="Princial" datum={{ x: Global.princial_data[5].x, y: Global.princial_data[5].y + Global.maxY * 0.08 }} textAnchor="start" style={{ stroke: '#FFFFFF' }}/>
-
-                            </VictoryGroup>
-
-                        </VictoryChart>
-                    </ScrollView>
-                </Content>
+                            <VictoryLabel
+                                text="CURRENT"
+                                datum={{ x: Global.current_data[Math.round(Global.current_data.length / 2)].x, y: Global.current_data[Math.round(Global.current_data.length / 2)].y + Global.maxY * 0.10 }}
+                                textAnchor="start" style={{ stroke: '#ffffff' }}
+                            />
+                            <VictoryLabel
+                                text="ALTERNATIVE"
+                                datum={{ x: Global.sgf_data[Math.round(Global.current_data.length / 2)].x, y: Global.sgf_data[Math.round(Global.current_data.length / 2)].y + Global.maxY * 0.20 }}
+                                textAnchor="start" style={{ stroke: '#ffffff' }}
+                            />
+                        </VictoryGroup>
+                    </VictoryChart>
+                </View>
 
                 <CustomFooter navigation={this.props.navigation}/>
-            </Container>
+            </ImageBackground>
         );
     }
 }

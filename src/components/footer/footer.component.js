@@ -7,6 +7,7 @@ import {
 } from 'native-base';
 import { Image } from 'react-native';
 import PropTypes from 'prop-types';
+import Orientation from 'react-native-orientation';
 import styles from './footer.styled';
 import Global from '../../pages/Global';
 
@@ -21,12 +22,14 @@ export default class CustomFooter extends Component {
 
     onGraph() {
         if (Global.maxY > 1) {
+            Orientation.lockToLandscape();
             this.props.navigation.navigate('Graph');
         }
     }
 
     onTable() {
         if (Global.tableDataOne.length > 1 || Global.tableDataTwo.length > 1) {
+            Orientation.lockToPortrait();
             this.props.navigation.navigate('Table');
         }
     }
@@ -40,7 +43,10 @@ export default class CustomFooter extends Component {
                     <Button
                         style={[styles.bottomButton, styles.addRightBorder]}
                         transparent
-                        onPress={() => navigate('Calculator')}
+                        onPress={() => {
+                            navigate('Calculator');
+                            Orientation.lockToPortrait();
+                        }}
                     >
                         <Image source={require('../../assets/images/calculator-footer.png')}/>
                         <Text style={styles.textContainer}>Calculator</Text>
@@ -67,7 +73,10 @@ export default class CustomFooter extends Component {
                     <Button
                         style={styles.bottomButton}
                         transparent
-                        onPress={() => navigate('AboutUs')}
+                        onPress={() => {
+                            navigate('AboutUs');
+                            Orientation.lockToPortrait();
+                        }}
                     >
                         <Image source={require('../../assets/images/about-footer.png')}/>
                         <Text style={styles.textContainer}>About us</Text>
