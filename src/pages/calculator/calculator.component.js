@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
     Container,
     Text,
-    Content,
+    Content, Icon,
 } from 'native-base';
 import {
     Image, View, ImageBackground, TouchableOpacity, TextInput,
@@ -698,12 +698,34 @@ class Calculator extends Component {
                             />
                         </View>
 
-                        <TouchableOpacity style={styles.btn_graph} onPress = {() => this.onGraph('Graph')}>
-                            <Image style={styles.btn_graph_inner} source={require('../../assets/images/btn_Graph.png')}/>
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress = {() => this.onGraph('Graph')}
+                        >
+                            <View style={styles.buttonImageView}>
+                                <Image style={styles.buttonImage} source={require('../../assets/images/graph-image.png')}/>
+                            </View>
+                            <View style={styles.buttonTextView}>
+                                <Text style={styles.buttonText}>See Your Graph</Text>
+                            </View>
+                            <View style={styles.buttonIconView}>
+                                <Icon name="arrow-forward" style={styles.buttonIcon} />
+                            </View>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.btn_graph} onPress = {() => this.onTable()}>
-                            <Image style={styles.btn_graph_inner} source={require('../../assets/images/btn_Table.png')}/>
+                        <TouchableOpacity
+                            style={[styles.button, { marginBottom: 20 }]}
+                            onPress = {() => this.onTable()}
+                        >
+                            <View style={styles.buttonImageView}>
+                                <Image style={styles.buttonImage} source={require('../../assets/images/table-image.png')}/>
+                            </View>
+                            <View style={styles.buttonTextView}>
+                                <Text style={styles.buttonText}>See Your Table</Text>
+                            </View>
+                            <View style={styles.buttonIconView}>
+                                <Icon name="arrow-forward" style={styles.buttonIcon} />
+                            </View>
                         </TouchableOpacity>
                     </Content>
 

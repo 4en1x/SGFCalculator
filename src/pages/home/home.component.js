@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import {
+    Icon,
     Container,
-    Content, Text,
+    Content,
+    Text,
 } from 'native-base';
 
 import {
@@ -46,10 +48,18 @@ class Home extends Component {
                     <Content>
                         <View style={styles.aboutBackground}>
                             <TouchableOpacity
-                                style={styles.button1}
+                                style={styles.buttonCalculator}
                                 onPress={() => navigate('Calculator')}
                             >
-                                <Image style={styles.aboutContactsInner} source={require('../../assets/images/btn_Return.png')} />
+                                <View style={styles.buttonImageView}>
+                                    <Image style={styles.buttonImage} source={require('../../assets/images/calculator-image.png')}/>
+                                </View>
+                                <View style={styles.buttonTextView}>
+                                    <Text style={styles.buttonText}>Return Comparison Calculator</Text>
+                                </View>
+                                <View style={styles.buttonIconView}>
+                                    <Icon name="arrow-forward" style={styles.buttonIcon} />
+                                </View>
                             </TouchableOpacity>
 
                             <Text style={styles.aboutText}>
@@ -58,10 +68,18 @@ class Home extends Component {
                         </View>
 
                         <TouchableOpacity
-                            style={styles.button2}
+                            style={styles.buttonAbout}
                             onPress={() => navigate('AboutUs')}
                         >
-                            <Image style={styles.aboutContactsInner} source={require('../../assets/images/btn_AboutUs.png')} />
+                            <View style={styles.buttonImageView}>
+                                <Image style={styles.buttonImage} source={require('../../assets/images/about-image.png')}/>
+                            </View>
+                            <View style={styles.buttonTextView}>
+                                <Text style={styles.buttonText}>About Us</Text>
+                            </View>
+                            <View style={styles.buttonIconView}>
+                                <Icon name="arrow-forward" style={styles.buttonIcon} />
+                            </View>
                         </TouchableOpacity>
                     </Content>
 

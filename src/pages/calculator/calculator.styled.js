@@ -63,19 +63,6 @@ export default StyleSheet.create({
         borderBottomColor: 'transparent',
     },
 
-    btn_graph: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 20,
-        borderRadius: 20,
-    },
-
-    btn_graph_inner: {
-        width: '90%',
-        resizeMode: 'contain',
-    },
-
     bottomButton: {
         borderRadius: 20,
         backgroundColor: '#1b4567',
@@ -107,5 +94,58 @@ export default StyleSheet.create({
     customBackTitleText: {
         color: '#ffffff',
         fontSize: 17,
+    },
+
+    button: {
+        width: '95%',
+        alignSelf: 'center',
+        marginTop: 20,
+        alignItems: 'center',
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+
+    buttonTextView: {
+        height: 70,
+        flex: 12,
+        flexDirection: 'row',
+        backgroundColor: '#7a8291',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    buttonImageView: {
+        height: 70,
+        flexDirection: 'row',
+        backgroundColor: '#7a8291',
+        flex: 4,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    buttonImage: {
+        marginLeft: 15,
+    },
+
+    buttonText: {
+        fontSize: 23,
+        textAlign: 'center',
+        fontWeight: '700',
+        color: '#fdfdfc',
+    },
+
+    buttonIconView: {
+        height: 70,
+        flex: 3,
+        flexDirection: 'row',
+        backgroundColor: '#afb3ba',
+    },
+
+    buttonIcon: {
+        marginTop: 8,
+        marginLeft: 25,
+        fontSize: 55,
+        color: '#eff0f0',
     },
 });

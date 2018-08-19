@@ -5,22 +5,10 @@ export default StyleSheet.create({
         flex: 1,
     },
 
-    button1: {
-        borderRadius: 20,
-        marginTop: -10,
-        alignItems: 'center',
-    },
-
-    button2: {
-        borderRadius: 20,
-        marginTop: 40,
-        alignItems: 'center',
-        flex: 1,
-        justifyContent: 'center',
-    },
-
     aboutBackground: {
-        marginTop: Dimensions.get('screen').height / 2 - 120,
+        width: '95%',
+        alignSelf: 'center',
+        marginTop: Dimensions.get('screen').height / 2 - 180,
         height: 120,
         backgroundColor: '#63656e',
     },
@@ -34,8 +22,66 @@ export default StyleSheet.create({
         color: '#ffffff',
     },
 
-    aboutContactsInner: {
-        width: '102%',
-        resizeMode: 'contain',
+    buttonCalculator: {
+        borderRadius: 20,
+        marginTop: 0,
+        alignItems: 'center',
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+
+    buttonAbout: {
+        alignSelf: 'center',
+        width: '95%',
+        borderRadius: 20,
+        marginTop: 40,
+        alignItems: 'center',
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+
+    buttonTextView: {
+        height: 70,
+        flex: 12,
+        flexDirection: 'row',
+        backgroundColor: '#7a8291',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    buttonImageView: {
+        height: 70,
+        flexDirection: 'row',
+        backgroundColor: '#7a8291',
+        flex: 4,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    buttonImage: {
+        marginLeft: 15,
+    },
+
+    buttonText: {
+        fontSize: 23,
+        textAlign: 'center',
+        fontWeight: '700',
+        color: '#fdfdfc',
+    },
+
+    buttonIconView: {
+        height: 70,
+        flex: 3,
+        flexDirection: 'row',
+        backgroundColor: '#afb3ba',
+    },
+
+    buttonIcon: {
+        marginTop: 8,
+        marginLeft: 25,
+        fontSize: 55,
+        color: '#eff0f0',
     },
 });
