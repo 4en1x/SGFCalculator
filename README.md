@@ -9,6 +9,7 @@
  - `react-native run-ios` - start emulator for ios
  -  for example, `react-native run-ios --simulator="iPhone X"` - start iPhone X emulator
  - `react-native run-android` - start emulator for android
- 
+ - you already have all XCode Settings, so you should just add your Developer Profile and click `Product -> Archive`
+ - almost same with `Android Studio` - you already have all settings, just do new build
  
  

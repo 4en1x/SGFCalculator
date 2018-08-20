@@ -8,7 +8,7 @@ export default StyleSheet.create({
     aboutBackground: {
         width: '95%',
         alignSelf: 'center',
-        marginTop: Dimensions.get('screen').height / (67 / 20),
+        marginTop: Dimensions.get('screen').height / (285 / 80),
         height: 120,
         backgroundColor: '#63656e',
     },
