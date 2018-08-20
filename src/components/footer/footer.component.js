@@ -7,6 +7,8 @@ import {
 } from 'native-base';
 import { Image } from 'react-native';
 import PropTypes from 'prop-types';
+
+import Expo from 'expo';
 import styles from './footer.styled';
 import Global from '../../pages/Global';
 
@@ -21,12 +23,14 @@ export default class CustomFooter extends Component {
 
     onGraph() {
         if (Global.maxY > 1) {
+            Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.LANDSCAPE);
             this.props.navigation.navigate('Graph');
         }
     }
 
     onTable() {
         if (Global.tableDataOne.length > 1 || Global.tableDataTwo.length > 1) {
+            Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT);
             this.props.navigation.navigate('Table');
         }
     }
@@ -40,7 +44,10 @@ export default class CustomFooter extends Component {
                     <Button
                         style={[styles.bottomButton, styles.addRightBorder]}
                         transparent
-                        onPress={() => navigate('Calculator')}
+                        onPress={() => {
+                            navigate('Calculator');
+                            Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT);
+                        }}
                     >
                         <Image source={require('../../assets/images/calculator-footer.png')}/>
                         <Text style={styles.textContainer}>Calculator</Text>
@@ -67,7 +74,10 @@ export default class CustomFooter extends Component {
                     <Button
                         style={styles.bottomButton}
                         transparent
-                        onPress={() => navigate('AboutUs')}
+                        onPress={() => {
+                            navigate('AboutUs');
+                            Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.PORTRAIT);
+                        }}
                     >
                         <Image source={require('../../assets/images/about-footer.png')}/>
                         <Text style={styles.textContainer}>About us</Text>
