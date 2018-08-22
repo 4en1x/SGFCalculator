@@ -72,43 +72,42 @@ class AboutUs extends Component {
 
     render() {
         return (
-            <Container>
-                <ImageBackground source={require('../../assets/images/home.png')} style={{ flex: 1 }}>
-                    <Content>
-                        <View style={styles.aboutBackground}>
-                            <Text style={styles.aboutText}>
+            <ImageBackground source={require('../../assets/images/home.png')} style={{ flex: 1 }}>
+                <Content scrollEnabled={false}>
+                    <View style={styles.aboutBackground}>
+                        <Text style={styles.aboutText}>
                                 The Strategic Global Fund is a registered retail managed fund that offers investors the opportunity to invest in a fund which specialises to investing in outstanding listed companies that trade on international share markets
-                            </Text>
+                        </Text>
 
-                            <Text style={styles.aboutText}>
+                        <Text style={styles.aboutText}>
                                 We create value for our investors by searching for compelling opportunities which have been overlocked in international share markets
-                            </Text>
-                        </View>
+                        </Text>
+                    </View>
 
-                        <View style={styles.btn_contact} >
-                            <Image source={require('../../assets/images/contactDetail.png')}/>
-                        </View>
+                    <View style={styles.btn_contact} >
+                        <Image source={require('../../assets/images/contactDetail.png')}/>
+                    </View>
 
-                        <TouchableOpacity style={styles.aboutContacts} onPress={() => this.openSite()}>
-                            <Image style={styles.aboutContactsInner} source={require('../../assets/images/email.png')}/>
-                        </TouchableOpacity>
+                    <TouchableOpacity style={styles.aboutContacts} onPress={() => this.openSite()}>
+                        <Image style={styles.aboutContactsInner} source={require('../../assets/images/email.png')}/>
+                    </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.aboutContacts} onPress={() => this.openMail()}>
-                            <Image style={styles.aboutContactsInner} source={require('../../assets/images/admin.png')}/>
-                        </TouchableOpacity>
+                    <TouchableOpacity style={styles.aboutContacts} onPress={() => this.openMail()}>
+                        <Image style={styles.aboutContactsInner} source={require('../../assets/images/admin.png')}/>
+                    </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.aboutContacts} onPress={() => this.openPhoneNumber()}>
-                            <Image style={styles.aboutContactsInner} source={require('../../assets/images/telephone.png')}/>
-                        </TouchableOpacity>
+                    <TouchableOpacity style={styles.aboutContacts} onPress={() => this.openPhoneNumber()}>
+                        <Image style={styles.aboutContactsInner} source={require('../../assets/images/telephone.png')}/>
+                    </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.aboutContacts} onPress={() => this.openMaps()} >
-                            <Image style={styles.aboutContactsInner} source={require('../../assets/images/level.png')}/>
-                        </TouchableOpacity>
-                    </Content>
+                    <TouchableOpacity style={styles.aboutContacts} onPress={() => this.openMaps()} >
+                        <Image style={styles.aboutContactsInner} source={require('../../assets/images/level.png')}/>
+                    </TouchableOpacity>
+                </Content>
 
-                    <CustomFooter navigation={this.props.navigation}/>
-                </ImageBackground>
-            </Container>
+                <CustomFooter navigation={this.props.navigation}/>
+            </ImageBackground>
+
         );
     }
 }
