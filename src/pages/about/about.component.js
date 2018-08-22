@@ -30,7 +30,9 @@ class AboutUs extends Component {
             backgroundColor: '#1b4567',
         },
         headerTitleStyle: {
+            paddingLeft: 70,
             fontSize: 20,
+            textAlign: 'center',
         },
         headerLeft: (
             <View style={styles.headerLeft}>

@@ -68,6 +68,8 @@ class Calculator extends Component {
         },
         headerTitleStyle: {
             fontSize: 20,
+            textAlign: 'center',
+            paddingLeft: 70,
         },
         headerLeft: (
             <View style={styles.headerLeft}>
