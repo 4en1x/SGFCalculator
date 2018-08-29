@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { HeaderBackButton } from 'react-navigation';
 import {
-    Container,
     Text,
     Content,
 } from 'native-base';
 
 import {
-    Linking, Platform, Image, View, ImageBackground, TouchableOpacity, Button,
+    Linking, Platform, Image, View, ImageBackground, TouchableOpacity,
 } from 'react-native';
 
 import PropTypes from 'prop-types';

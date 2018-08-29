@@ -58,6 +58,8 @@ class Calculator extends Component {
             curTotal: 0,
             potentialTotal: 0,
         };
+
+        this.onChangePotentialAdditionUnit = this.onChangePotentialAdditionUnit.bind(this);
     }
 
     static navigationOptions = ({ navigation }) => ({
@@ -175,8 +177,8 @@ class Calculator extends Component {
 
         if (this.state.cur_compound_unit === 'Daily') {
             await this.setState({ m_curcompound: 365 });
-        } else if (this.state.cur_addition_unit === 'Weekly') {
-            await this.setState({ m_curaddition: 52 });
+        } else if (this.state.cur_compound_unit === 'Weekly') {
+            await this.setState({ m_curcompound: 52 });
         } else if (this.state.cur_compound_unit === 'Monthly') {
             await this.setState({ m_curcompound: 12 });
         } else if (this.state.cur_compound_unit === 'Quarterly') {
@@ -195,14 +197,19 @@ class Calculator extends Component {
             await this.setState({ m_time: 1 });
         }
 
-        const RperN = (this.state.cur_interest - this.state.cur_inflation)
-            / this.state.m_curaddition;
+        const RperN = (this.state.cur_interest) / this.state.m_curcompound;
+        const effectiveTime = (this.state.m_curcompound * this.state.m_time * this.state.cur_duration);
+        const effectiveAdditionTime = (this.state.m_curaddition * this.state.m_time * this.state.cur_duration);
+        const periodicInterest = this.state.cur_interest / this.state.m_curaddition;
 
-        let result = this.state.cur_principle * (1 + (this.state.cur_interest - this.state.cur_inflation) / this.state.m_curcompound) ** (this.state.m_curcompound * this.state.m_time * this.state.cur_duration);
-        const resultAddition = this.state.cur_addition * (((1 + RperN) ** (this.state.m_curaddition * this.state.m_time * this.state.cur_duration) - 1) / (RperN));// * (1 + (RperN));
+        let result = this.state.cur_principle * (1 + RperN) ** (effectiveTime);
+        const resultAddition = (this.state.cur_addition / (periodicInterest)) * (((1 + periodicInterest) ** (effectiveAdditionTime) - 1));// * (1 + (RperN));
+        // const resultAddition = this.state.cur_addition * (((1 + RperN) ** (effectiveTimen) - 1) / (RperN));// * (1 + (RperN));
 
+        const inflationRate = Math.pow((1 + this.state.cur_inflation), this.state.cur_duration);
         result += resultAddition;
-        result = result.toFixed(2);
+        result /= inflationRate;
+        result = result.toFixed(2);;
 
         this.setState({ curTotal: result.toString() });
     }
@@ -259,8 +266,8 @@ class Calculator extends Component {
 
         if (this.state.potential_compound_unit === 'Daily') {
             await this.setState({ m_potentialcompound: 365 });
-        } else if (this.state.potential_addition_unit === 'Weekly') {
-            await this.setState({ m_potentialaddition: 52 });
+        } else if (this.state.potential_compound_unit === 'Weekly') {
+            await this.setState({ m_potentialcompound: 52 });
         } else if (this.state.potential_compound_unit === 'Monthly') {
             await this.setState({ m_potentialcompound: 12 });
         } else if (this.state.potential_compound_unit === 'Quarterly') {
