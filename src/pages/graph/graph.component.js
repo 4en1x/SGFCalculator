@@ -128,12 +128,12 @@ class Graph extends Component {
                             />
 
                             <VictoryLabel
-                                text="CURRENT"
+                                text="ALTERNATIVE"
                                 datum={{ x: Global.current_data[Math.round(Global.current_data.length / 2)].x, y: Global.current_data[Math.round(Global.current_data.length / 2)].y + Global.maxY * 0.10 }}
                                 textAnchor="start" style={{ stroke: '#ffffff' }}
                             />
                             <VictoryLabel
-                                text="ALTERNATIVE"
+                                text="CURRENT"
                                 datum={{ x: Global.sgf_data[Math.round(Global.current_data.length / 2)].x, y: Global.sgf_data[Math.round(Global.current_data.length / 2)].y + Global.maxY * 0.20 }}
                                 textAnchor="start" style={{ stroke: '#ffffff' }}
                             />

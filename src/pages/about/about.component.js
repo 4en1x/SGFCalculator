@@ -71,15 +71,15 @@ class AboutUs extends Component {
     render() {
         return (
             <Container>
-                <ImageBackground source={require('../../assets/images/home.png')} style={{ flex: 1 }}>
+                <ImageBackground source={require('../../assets/images/about.jpg')} style={{ flex: 1 }}>
                     <Content>
                         <View style={styles.aboutBackground}>
                             <Text style={styles.aboutText}>
-                                The Strategic Global Fund is a registered retail managed fund that offers investors the opportunity to invest in a fund which specialises to investing in outstanding listed companies that trade on international share markets
+                              SGF offers investors the opportunity to invest in a fund which specialises in investing in international shares. We follow a value-driven investment approach supported by intensive fundamental research, which enables us to invest in strong but undervalued companies around the world.
                             </Text>
 
                             <Text style={styles.aboutText}>
-                                We create value for our investors by searching for compelling opportunities which have been overlocked in international share markets
+                                We create value for our investors by searching for compelling opportunities which have been overlooked in international share markets.
                             </Text>
                         </View>
 

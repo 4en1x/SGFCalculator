@@ -16,12 +16,12 @@ class CustomTable extends Component {
         super(props);
 
         this.state = {
-            tableHeadOne: [Global.tableHeaderOneDays, 'Result', 'Interest'],
+            tableHeadOne: ['Months', 'Result', 'Interest'],
             tableHeadTwo: [Global.tableHeaderTwoDays, 'Result', 'Interest'],
             widthArr: [
-                Dimensions.get('screen').width / 7,
+                Dimensions.get('screen').width / 7 + 12,
                 Dimensions.get('screen').width / 2,
-                Dimensions.get('screen').width / 3,
+                19 * Dimensions.get('screen').width / 56 - 10,
             ],
         };
     }
@@ -62,7 +62,7 @@ class CustomTable extends Component {
 
     render() {
         return (
-            <Container>
+            <Container style = {{ margin: 0 }}>
                 <Content>
                     <View style={styles.container}>
                         <ScrollView style={styles.dataWrapper}>
@@ -94,7 +94,7 @@ class CustomTable extends Component {
                             </Table>
                             <View style = {{ marginTop: 10, marginBottom: 10, alignItems: 'center' }}>
                                 <Text style = {{ color: '#ffffff', fontSize: 20 }}>
-                                    Potential Investment Strategy
+                                    Alternative Investment Strategy
                                 </Text>
                             </View>
                             <Table borderStyle={{ borderColor: '#000000' }}>
@@ -119,7 +119,6 @@ class CustomTable extends Component {
                                 }
                             </Table>
                         </ScrollView>
-
                     </View>
                 </Content>
 

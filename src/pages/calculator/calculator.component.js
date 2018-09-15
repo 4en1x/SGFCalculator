@@ -1,16 +1,10 @@
-import React, { Component } from 'react';
-import {
-    Container,
-    Text,
-    Content, Icon,
-} from 'native-base';
-import {
-    Image, View, ImageBackground, TouchableOpacity, TextInput,
-} from 'react-native';
+import React, {Component} from 'react';
+import {Container, Content, Icon, Text,} from 'native-base';
+import {Image, ImageBackground, TextInput, TouchableOpacity, View,} from 'react-native';
 
-import { Dropdown } from 'react-native-material-dropdown';
+import {Dropdown} from 'react-native-material-dropdown';
 import PropTypes from 'prop-types';
-import { HeaderBackButton } from 'react-navigation';
+import {HeaderBackButton} from 'react-navigation';
 import styles from './calculator.styled';
 import Global from '../Global';
 import CustomFooter from '../../components/footer/footer.component';
@@ -58,6 +52,7 @@ class Calculator extends Component {
             curTotal: 0,
             potentialTotal: 0,
         };
+        this.onChangePotentialAdditionUnit = this.onChangePotentialAdditionUnit.bind(this);
     }
 
     static navigationOptions = ({ navigation }) => ({
@@ -133,7 +128,7 @@ class Calculator extends Component {
     }
 
     async onChangeCurAdditionUnit(text) {
-        await this.setState({ cur_duration_unit: text });
+        await this.setState({ cur_addition_unit: text });
         this.onCurrentInvestment();
     }
 
@@ -173,8 +168,8 @@ class Calculator extends Component {
 
         if (this.state.cur_compound_unit === 'Daily') {
             await this.setState({ m_curcompound: 365 });
-        } else if (this.state.cur_addition_unit === 'Weekly') {
-            await this.setState({ m_curaddition: 52 });
+        } else if (this.state.cur_compound_unit === 'Weekly') {
+            await this.setState({ m_curcompound: 52 });
         } else if (this.state.cur_compound_unit === 'Monthly') {
             await this.setState({ m_curcompound: 12 });
         } else if (this.state.cur_compound_unit === 'Quarterly') {
@@ -193,14 +188,18 @@ class Calculator extends Component {
             await this.setState({ m_time: 1 });
         }
 
-        const RperN = (this.state.cur_interest - this.state.cur_inflation)
-            / this.state.m_curaddition;
+      const RperN = (this.state.cur_interest) / this.state.m_curcompound;
+      const effectiveTime = (this.state.m_curcompound * this.state.m_time * this.state.cur_duration);
+      const effectiveAdditionTime = (this.state.m_curaddition * this.state.m_time * this.state.cur_duration);
+      const periodicInterest = this.state.cur_interest / this.state.m_curaddition;
+      let result = this.state.cur_principle * (1 + RperN) ** (effectiveTime);
+      const resultAddition = (this.state.cur_addition / (periodicInterest)) * (((1 + periodicInterest) ** (effectiveAdditionTime) - 1));// * (1 + (RperN));
+      // const resultAddition = this.state.cur_addition * (((1 + RperN) ** (effectiveTimen) - 1) / (RperN));// * (1 + (RperN));
 
-        let result = this.state.cur_principle * (1 + (this.state.cur_interest - this.state.cur_inflation) / this.state.m_curcompound) ** (this.state.m_curcompound * this.state.m_time * this.state.cur_duration);
-        const resultAddition = this.state.cur_addition * (((1 + RperN) ** (this.state.m_curaddition * this.state.m_time * this.state.cur_duration) - 1) / (RperN));// * (1 + (RperN));
-
-        result += resultAddition;
-        result = result.toFixed(2);
+      const inflationRate = Math.pow((1 + this.state.cur_inflation), this.state.cur_duration);
+      result += resultAddition;
+      result /= inflationRate;
+      result = result.toFixed(2);
 
         this.setState({ curTotal: result.toString() });
     }
@@ -257,8 +256,8 @@ class Calculator extends Component {
 
         if (this.state.potential_compound_unit === 'Daily') {
             await this.setState({ m_potentialcompound: 365 });
-        } else if (this.state.potential_addition_unit === 'Weekly') {
-            await this.setState({ m_potentialaddition: 52 });
+        } else if (this.state.potential_compound_unit === 'Weekly') {
+            await this.setState({ m_potentialcompound: 52 });
         } else if (this.state.potential_compound_unit === 'Monthly') {
             await this.setState({ m_potentialcompound: 12 });
         } else if (this.state.potential_compound_unit === 'Quarterly') {
@@ -277,15 +276,16 @@ class Calculator extends Component {
             await this.setState({ m_time: 1 });
         }
 
-        const RperN = (this.state.potential_interest - this.state.potential_inflation)
-            / this.state.m_potentialaddition;
-
-        let result = this.state.potential_principle * (1 + (this.state.potential_interest - this.state.potential_inflation) / this.state.m_potentialcompound) ** (this.state.m_potentialcompound * this.state.m_time * this.state.potential_duration);
-        const resultAddition = this.state.potential_addition * (((1 + RperN) ** (this.state.m_potentialaddition * this.state.m_time * this.state.potential_duration) - 1) / (RperN));
-
+        const RperN = (this.state.potential_interest) / this.state.m_potentialcompound;
+        const effectiveTime = (this.state.m_potentialcompound * this.state.m_time * this.state.potential_duration);
+        const effectiveAdditionTime = (this.state.m_potentialaddition * this.state.m_time * this.state.potential_duration);
+        const periodicInterest = this.state.potential_interest / this.state.m_potentialaddition;
+        let result = this.state.potential_principle * (1 + RperN) ** (effectiveTime);
+        const resultAddition = (this.state.potential_addition / (periodicInterest)) * (((1 + periodicInterest) ** (effectiveAdditionTime) - 1));// * (1 + (RperN));
+        const inflationRate = Math.pow((1 + this.state.potential_inflation), this.state.potential_duration);
         result += resultAddition;
+        result /= inflationRate;
         result = result.toFixed(2);
-
         this.setState({ potentialTotal: result.toString() });
     }
 
@@ -324,18 +324,26 @@ class Calculator extends Component {
         let resultCurrent = 0;
         let resultPrincipal = 0;
 
+      const RperN = (this.state.cur_interest) / this.state.m_curcompound;
+
         for (let i = 1; i <= days; i += 1) {
-            const RperNSGF = (this.state.potential_interest - this.state.potential_inflation) / this.state.m_potentialaddition;
-            resultSGF = this.state.cur_principle * (1 + (this.state.potential_interest - this.state.potential_inflation) / this.state.m_potentialcompound) ** (this.state.m_potentialcompound * m_time_tmp * i);
+            const RperNSGF = (this.state.potential_interest) / this.state.m_potentialaddition;
+            resultSGF = this.state.cur_principle * (1 + RperN) ** (this.state.m_potentialcompound * m_time_tmp * i);
             const resultAdditionSGF = this.state.potential_addition * (((1 + RperNSGF) ** (this.state.m_potentialaddition * m_time_tmp * i) - 1) / (RperNSGF));
             resultSGF += resultAdditionSGF;
 
-            const RperNCurrent = (this.state.cur_interest - this.state.cur_inflation) / this.state.m_curaddition;
-            resultCurrent = this.state.cur_principle * (1 + (this.state.cur_interest - this.state.cur_inflation) / this.state.m_curcompound) ** (this.state.m_curcompound * m_time_tmp * i);
+            const RperNCurrent = (this.state.cur_interest) / this.state.m_curaddition;
+            resultCurrent = this.state.cur_principle * (1 + RperN) ** (this.state.m_curcompound * m_time_tmp * i);
             const resultAdditionCurrent = this.state.cur_addition * (((1 + RperNCurrent) ** (this.state.m_curaddition * m_time_tmp * i) - 1) / (RperNCurrent));
             resultCurrent += resultAdditionCurrent;
 
-            resultPrincipal = this.state.cur_principle * (1 + (this.state.cur_interest - this.state.cur_inflation) * m_time_tmp * i);
+          resultPrincipal = this.state.cur_principle * (1 + (this.state.cur_interest) * m_time_tmp * i);
+
+          const currentInflationRate = Math.pow((1 + this.state.cur_inflation), i);
+          const potentialInflationRate = Math.pow((1 + this.state.potential_inflation), i);
+          resultCurrent /= currentInflationRate;
+          resultSGF /= potentialInflationRate;
+          resultPrincipal /= potentialInflationRate;
 
             Global.princial_data.push({ x: i, y: parseInt(resultPrincipal.toFixed(0), 10) });
             Global.current_data.push({ x: i, y: parseInt(resultCurrent.toFixed(0), 10) });
@@ -369,13 +377,15 @@ class Calculator extends Component {
         Global.tableDataOne = [[0, `$${parseInt(this.state.cur_principle, 10)}`, '$0']];
 
         let resultSGF = 0;
+      const RperN = (this.state.cur_interest) / this.state.m_curcompound;
 
         for (let i = 1; i <= days; i += 1) {
-            const RperNSGF = (this.state.cur_interest - this.state.cur_inflation) / this.state.m_curaddition;
-            resultSGF = this.state.cur_principle * (1 + (this.state.cur_interest - this.state.cur_inflation) / this.state.m_curcompound) ** (this.state.m_curcompound * m_time_tmp * i);
+            const RperNSGF = (this.state.cur_interest) / this.state.m_curaddition;
+            resultSGF = this.state.cur_principle * (1 + RperN) ** (this.state.m_curcompound * m_time_tmp * i);
             const resultAdditionSGF = this.state.cur_addition * (((1 + RperNSGF) ** (this.state.m_curaddition * m_time_tmp * i) - 1) / (RperNSGF));
             resultSGF += resultAdditionSGF;
-            const deposite = this.state.cur_addition * this.state.m_curaddition * m_time_tmp * i;
+          let deposite = this.state.cur_addition * this.state.m_curaddition * m_time_tmp * i;
+          resultSGF /= Math.pow((1 + this.state.cur_inflation), i);
             let interestTotal = resultSGF - this.state.cur_principle - deposite;
             interestTotal = interestTotal.toFixed(2);
             Global.tableDataOne.push([i, `$${parseInt(resultSGF.toFixed(2), 10)}`, `$${interestTotal}`]);
@@ -388,20 +398,22 @@ class Calculator extends Component {
         const m_time_tmp = this.state.m_time;
         Global.tableHeaderTwoDays = this.state.cur_duration_unit;
 
-        Global.tableDataTwo = [[0, `$${parseInt(this.state.cur_principle, 10)}`, '$0']];
+        Global.tableDataTwo = [[0, `$${parseInt(this.state.potential_principle, 10)}`, '$0']];
 
         let resultSGF = 0;
+      const RperN = (this.state.potential_interest) / this.state.m_potentialcompound;
 
-        for (let i = 1; i <= days; i += 1) {
-            const RperNSGF = (this.state.potential_interest - this.state.potential_inflation) / this.state.m_potentialaddition;
-            resultSGF = this.state.cur_principle * (1 + (this.state.potential_interest - this.state.potential_inflation) / this.state.m_potentialcompound) ** (this.state.m_potentialcompound * m_time_tmp * i);
-            const resultAdditionSGF = this.state.potential_addition * (((1 + RperNSGF) ** (this.state.m_potentialaddition * m_time_tmp * i) - 1) / (RperNSGF));
-            resultSGF += resultAdditionSGF;
-            const deposite = this.state.potential_addition * this.state.m_potentialaddition * m_time_tmp * i;
-            let interestTotal = resultSGF - this.state.cur_principle - deposite;
-            interestTotal = interestTotal.toFixed(2);
-            Global.tableDataTwo.push([i, `$${parseInt(resultSGF.toFixed(2), 10)}`, `$${interestTotal}`]);
-        }
+      for (let i = 1; i <= days; i += 1) {
+        const RperNSGF = (this.state.potential_interest) / this.state.m_potentialaddition;
+        resultSGF = this.state.potential_principle * (1 + RperN) ** (this.state.m_potentialcompound * m_time_tmp * i);
+        const resultAdditionSGF = this.state.potential_addition * (((1 + RperNSGF) ** (this.state.m_potentialaddition * m_time_tmp * i) - 1) / (RperNSGF));
+        resultSGF += resultAdditionSGF;
+        const deposite = this.state.potential_addition * this.state.m_potentialaddition * m_time_tmp * i;
+        resultSGF /= Math.pow((1 + this.state.potential_inflation), i);
+        let interestTotal = resultSGF - this.state.potential_principle - deposite;
+        interestTotal = interestTotal.toFixed(2);
+        Global.tableDataTwo.push([i, `$${parseInt(resultSGF.toFixed(2), 10)}`, `$${interestTotal}`]);
+      }
     }
 
     render() {
@@ -446,7 +458,7 @@ class Calculator extends Component {
                         </View>
 
                         <View style={styles.second}>
-                            <Text style={{ marginLeft: 10, color: '#ffffff' }}>Interest</Text>
+                            <Text style={{ marginLeft: 10, color: '#ffffff' }}>Return</Text>
                             <TextInput style={[styles.input2, { marginLeft: 22 }]}
                                 underlineColorAndroid="transparent"
                                 placeholderTextColor="#ffffff"
@@ -570,7 +582,7 @@ class Calculator extends Component {
 
                         <View style = {{ marginTop: 10, marginBottom: 10, alignItems: 'center' }}>
                             <Text style = {{ color: '#ffffff', fontSize: 20 }}>
-                                Potential Investment Strategy
+                                Alternative Investment Strategy
                             </Text>
                         </View>
 
@@ -588,7 +600,7 @@ class Calculator extends Component {
                         </View>
 
                         <View style = {styles.second}>
-                            <Text style = {{ marginLeft: 10, color: '#ffffff' }}>Interest</Text>
+                            <Text style = {{ marginLeft: 10, color: '#ffffff' }}>Return</Text>
                             <TextInput style={[styles.input2, { marginLeft: 22 }]}
                                 underlineColorAndroid = "transparent"
                                 placeholderTextColor = "#ffffff"
