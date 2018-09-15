@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { HeaderBackButton } from 'react-navigation';
 import {
-    Container,
     Text,
     Content,
 } from 'native-base';
 
 import {
-    Linking, Platform, Image, View, ImageBackground, TouchableOpacity, Button,
+    Linking, Platform, Image, View, ImageBackground, TouchableOpacity,
 } from 'react-native';
 
 import PropTypes from 'prop-types';
@@ -30,7 +29,9 @@ class AboutUs extends Component {
             backgroundColor: '#1b4567',
         },
         headerTitleStyle: {
+            paddingLeft: 70,
             fontSize: 20,
+            textAlign: 'center',
         },
         headerLeft: (
             <View style={styles.headerLeft}>
@@ -70,43 +71,42 @@ class AboutUs extends Component {
 
     render() {
         return (
-            <Container>
-                <ImageBackground source={require('../../assets/images/about.jpg')} style={{ flex: 1 }}>
-                    <Content>
-                        <View style={styles.aboutBackground}>
-                            <Text style={styles.aboutText}>
-                              SGF offers investors the opportunity to invest in a fund which specialises in investing in international shares. We follow a value-driven investment approach supported by intensive fundamental research, which enables us to invest in strong but undervalued companies around the world.
-                            </Text>
+            <ImageBackground source={require('../../assets/images/home.png')} style={{ flex: 1 }}>
+                <Content scrollEnabled={false}>
+                    <View style={styles.aboutBackground}>
+                        <Text style={styles.aboutText}>
+                            SGF offers investors the opportunity to invest in a fund which specialises in investing in international shares. We follow a value-driven investment approach supported by intensive fundamental research, which enables us to invest in strong but undervalued companies around the world.
+                        </Text>
 
-                            <Text style={styles.aboutText}>
-                                We create value for our investors by searching for compelling opportunities which have been overlooked in international share markets.
-                            </Text>
-                        </View>
+                        <Text style={styles.aboutText}>
+                            We create value for our investors by searching for compelling opportunities which have been overlooked in international share markets.
+                        </Text>
+                    </View>
 
-                        <View style={styles.btn_contact} >
-                            <Image source={require('../../assets/images/contactDetail.png')}/>
-                        </View>
+                    <View style={styles.btn_contact} >
+                        <Image source={require('../../assets/images/contactDetail.png')}/>
+                    </View>
 
-                        <TouchableOpacity style={styles.aboutContacts} onPress={() => this.openSite()}>
-                            <Image style={styles.aboutContactsInner} source={require('../../assets/images/email.png')}/>
-                        </TouchableOpacity>
+                    <TouchableOpacity style={styles.aboutContacts} onPress={() => this.openSite()}>
+                        <Image style={styles.aboutContactsInner} source={require('../../assets/images/email.png')}/>
+                    </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.aboutContacts} onPress={() => this.openMail()}>
-                            <Image style={styles.aboutContactsInner} source={require('../../assets/images/admin.png')}/>
-                        </TouchableOpacity>
+                    <TouchableOpacity style={styles.aboutContacts} onPress={() => this.openMail()}>
+                        <Image style={styles.aboutContactsInner} source={require('../../assets/images/admin.png')}/>
+                    </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.aboutContacts} onPress={() => this.openPhoneNumber()}>
-                            <Image style={styles.aboutContactsInner} source={require('../../assets/images/telephone.png')}/>
-                        </TouchableOpacity>
+                    <TouchableOpacity style={styles.aboutContacts} onPress={() => this.openPhoneNumber()}>
+                        <Image style={styles.aboutContactsInner} source={require('../../assets/images/telephone.png')}/>
+                    </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.aboutContacts} onPress={() => this.openMaps()} >
-                            <Image style={styles.aboutContactsInner} source={require('../../assets/images/level.png')}/>
-                        </TouchableOpacity>
-                    </Content>
+                    <TouchableOpacity style={styles.aboutContacts} onPress={() => this.openMaps()} >
+                        <Image style={styles.aboutContactsInner} source={require('../../assets/images/level.png')}/>
+                    </TouchableOpacity>
+                </Content>
 
-                    <CustomFooter navigation={this.props.navigation}/>
-                </ImageBackground>
-            </Container>
+                <CustomFooter navigation={this.props.navigation}/>
+            </ImageBackground>
+
         );
     }
 }

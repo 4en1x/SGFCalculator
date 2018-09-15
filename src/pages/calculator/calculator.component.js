@@ -1,10 +1,21 @@
-import React, {Component} from 'react';
-import {Container, Content, Icon, Text,} from 'native-base';
-import {Image, ImageBackground, TextInput, TouchableOpacity, View,} from 'react-native';
+import React, { Component } from 'react';
+import {
+    Container,
+    Content,
+    Icon,
+    Text,
+} from 'native-base';
+import {
+    Image,
+    ImageBackground,
+    TextInput,
+    TouchableOpacity,
+    View,
+} from 'react-native';
 
-import {Dropdown} from 'react-native-material-dropdown';
+import { Dropdown } from 'react-native-material-dropdown';
 import PropTypes from 'prop-types';
-import {HeaderBackButton} from 'react-navigation';
+import { HeaderBackButton } from 'react-navigation';
 import styles from './calculator.styled';
 import Global from '../Global';
 import CustomFooter from '../../components/footer/footer.component';
@@ -52,6 +63,7 @@ class Calculator extends Component {
             curTotal: 0,
             potentialTotal: 0,
         };
+
         this.onChangePotentialAdditionUnit = this.onChangePotentialAdditionUnit.bind(this);
     }
 
@@ -63,6 +75,8 @@ class Calculator extends Component {
         },
         headerTitleStyle: {
             fontSize: 20,
+            textAlign: 'center',
+            paddingLeft: 70,
         },
         headerLeft: (
             <View style={styles.headerLeft}>
@@ -256,8 +270,8 @@ class Calculator extends Component {
 
         if (this.state.potential_compound_unit === 'Daily') {
             await this.setState({ m_potentialcompound: 365 });
-        } else if (this.state.potential_compound_unit === 'Weekly') {
-            await this.setState({ m_potentialcompound: 52 });
+        } else if (this.state.potential_addition_unit === 'Weekly') {
+            await this.setState({ m_potentialaddition: 52 });
         } else if (this.state.potential_compound_unit === 'Monthly') {
             await this.setState({ m_potentialcompound: 12 });
         } else if (this.state.potential_compound_unit === 'Quarterly') {

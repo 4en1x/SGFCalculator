@@ -18,6 +18,6 @@ export default StyleSheet.create({
         margin: 0,
         color: '#ffffff',
         alignItems: 'center',
-        fontSize: 13,
+        fontSize: 11,
     },
 });

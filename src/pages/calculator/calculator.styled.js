@@ -144,7 +144,7 @@ export default StyleSheet.create({
 
     buttonIcon: {
         marginTop: 8,
-        marginLeft: 25,
+        marginLeft: 15,
         fontSize: 55,
         color: '#eff0f0',
     },

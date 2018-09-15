@@ -40,52 +40,52 @@ class Home extends Component {
         const { navigate } = this.props.navigation;
 
         return (
-            <Container>
-                <ImageBackground
-                    source={require('../../assets/images/home.jpg')}
-                    style={{ flex: 1 }}
-                >
-                    <Content>
-                        <View style={styles.aboutBackground}>
-                            <TouchableOpacity
-                                style={styles.buttonCalculator}
-                                onPress={() => navigate('Calculator')}
-                            >
-                                <View style={styles.buttonImageView}>
-                                    <Image style={styles.buttonImage} source={require('../../assets/images/calculator-image.png')}/>
-                                </View>
-                                <View style={styles.buttonTextView}>
-                                    <Text style={styles.buttonText}>Return Comparison Calculator</Text>
-                                </View>
-                                <View style={styles.buttonIconView}>
-                                    <Icon name="arrow-forward" style={styles.buttonIcon} />
-                                </View>
-                            </TouchableOpacity>
 
-                            <Text style={styles.aboutText}>
-                                A tool to compare the result from alternative investment strategies.
-                            </Text>
-                        </View>
-
+            <ImageBackground
+                source={require('../../assets/images/home.jpg')}
+                style={{ flex: 1 }}
+            >
+                <Content scrollEnabled={false}>
+                    <View style={styles.aboutBackground}>
                         <TouchableOpacity
-                            style={styles.buttonAbout}
-                            onPress={() => navigate('AboutUs')}
+                            style={styles.buttonCalculator}
+                            onPress={() => navigate('Calculator')}
                         >
                             <View style={styles.buttonImageView}>
-                                <Image style={styles.buttonImage} source={require('../../assets/images/about-image.png')}/>
+                                <Image style={styles.buttonImage} source={require('../../assets/images/calculator-image.png')}/>
                             </View>
                             <View style={styles.buttonTextView}>
-                                <Text style={styles.buttonText}>About Us</Text>
+                                <Text style={styles.buttonText}>Return Comparison Calculator</Text>
                             </View>
                             <View style={styles.buttonIconView}>
                                 <Icon name="arrow-forward" style={styles.buttonIcon} />
                             </View>
                         </TouchableOpacity>
-                    </Content>
 
-                    <CustomFooter navigation={this.props.navigation}/>
-                </ImageBackground>
-            </Container>
+                        <Text style={styles.aboutText}>
+                                A tool to compare the result from alternative investment strategies.
+                        </Text>
+                    </View>
+
+                    <TouchableOpacity
+                        style={styles.buttonAbout}
+                        onPress={() => navigate('AboutUs')}
+                    >
+                        <View style={styles.buttonImageView}>
+                            <Image style={styles.buttonImage} source={require('../../assets/images/about-image.png')}/>
+                        </View>
+                        <View style={styles.buttonTextView}>
+                            <Text style={styles.buttonText}>About Us</Text>
+                        </View>
+                        <View style={styles.buttonIconView}>
+                            <Icon name="arrow-forward" style={styles.buttonIcon} />
+                        </View>
+                    </TouchableOpacity>
+                </Content>
+
+                <CustomFooter navigation={this.props.navigation}/>
+            </ImageBackground>
+
         );
     }
 }

@@ -29,6 +29,8 @@ class Graph extends Component {
         },
         headerTitleStyle: {
             fontSize: 20,
+            textAlign: 'center',
+            paddingLeft: 70,
         },
         headerLeft: (
             <View style={styles.headerLeft}>
@@ -59,7 +61,6 @@ class Graph extends Component {
 
     componentDidMount() {
         Expo.ScreenOrientation.allow(Expo.ScreenOrientation.Orientation.LANDSCAPE);
-
     }
 
     render() {
@@ -72,6 +73,16 @@ class Graph extends Component {
         else if (Global.maxY > 10000) m_fontSize = 8;
         else if (Global.maxY > 100000) m_fontSize = 5;
 
+        let firstDestination = Global.current_data[Math.round(Global.current_data.length / 2)].y;
+        let secondDestination = Global.sgf_data[Math.round(Global.current_data.length / 2)].y;
+
+        if (firstDestination >= secondDestination) {
+            firstDestination += Global.maxY * 0.10;
+            secondDestination -= Global.maxY * 0.10;
+        } else {
+            firstDestination -= Global.maxY * 0.10;
+            secondDestination += Global.maxY * 0.10;
+        }
         return (
             <ImageBackground
                 source={require('../../assets/images/background-graph.png')}
