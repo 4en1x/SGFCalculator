@@ -16,7 +16,7 @@ class CustomTable extends Component {
         super(props);
 
         this.state = {
-            tableHeadOne: ['Months', 'Result', 'Interest'],
+            tableHeadOne: [Global.tableHeaderOneDays, 'Result', 'Interest'],
             tableHeadTwo: [Global.tableHeaderTwoDays, 'Result', 'Interest'],
             widthArr: [
                 Dimensions.get('screen').width / 7 + 12,

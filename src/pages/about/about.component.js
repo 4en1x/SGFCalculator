@@ -71,7 +71,7 @@ class AboutUs extends Component {
 
     render() {
         return (
-            <ImageBackground source={require('../../assets/images/home.png')} style={{ flex: 1 }}>
+            <ImageBackground source={require('../../assets/images/about.jpg')} style={{ flex: 1 }}>
                 <Content scrollEnabled={false}>
                     <View style={styles.aboutBackground}>
                         <Text style={styles.aboutText}>
